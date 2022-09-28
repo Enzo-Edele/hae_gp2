@@ -4,6 +4,7 @@
 //<>fichier pris, ''fichier a nous
 #include <iostream>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -14,6 +15,10 @@ struct Toto
 
 int main()
 {
+    struct Test
+    {
+        float y = 0.4444f;
+    };
     {
         //std::cout << "Hello World!\n";
         printf("12345\n");
@@ -47,5 +52,54 @@ int main()
     {
         Toto toto;
         cout << to_string(toto.x) << "\n";
+
+        Test test;
+        cout << to_string(test.y) << "\n";
     }
+
+    {
+        std::unordered_map<int, std::string> t;
+        t[0] = "toto";
+        cout << t[0] << "\n";
+
+        for (std::unordered_map<int, std::string>::iterator iter = t.begin(); iter != t.end(); iter++) { //recup iterateur
+            auto& p = *iter;  //esperluette pour faire reference en utilisant l'étoile qui demande le contenu
+            cout << p.first << "=" << p.second << "\n";
+        }
+
+        for (std::pair<const int, std::string>& p : t) {
+            cout << p.first << "=" << p.second << "\n";
+        }
+    }
+
+    {
+        int c = 0;
+        int tab[] = { 0, 1 ,2 ,3 ,4 };
+        int* d = &tab[0]; //d a l'adresse de tab[0] et modifier d modifie l'adresse contenue dans d(donc ce qu'il reference)
+        d++;
+        *d = 666;
+        int* e0 = nullptr;
+        int* e1 = NULL;
+        int* e2 = 0;
+        int here = 0;
+    }
+    {
+        int c = 0;
+        int& d = c; //d reference c modifier d va modifier c, d reference c
+        d++;
+        int here = 0;
+    }
+    {
+        int tab[] = { 66, 1, 2 ,3 };
+        int* c = & tab[0];
+        *c = 0;
+        *c++;
+        *++c;
+        c++;
+    }
+}
+
+template<typename T>
+class Array {
+
 };

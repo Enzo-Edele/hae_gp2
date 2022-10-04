@@ -113,14 +113,24 @@ int main()
         Vec4 v2 = v0.add(v1);
 
         if (v2.x != 3) throw "Add";
+        if (v2.y != 6) throw "Add";
+        if (v2.z != 9) throw "Add";
+        if (v2.w != 12) throw "Add";
     }
     {
         Vec4 v3 = v1.sub(v0);
         if (v3.x != 1) throw "Sub";
+        if (v3.y != 2) throw "Sub";
+    }
+    {
+        Vec4 v4 = v0.mul(v1);
+        if (v4.x != 2) throw "Mul";
+        if (v4.y != 8) throw "Mul";
     }
     {
         Vec4 v4 = v1.div(v1);
         if (v4.x != 1) throw "Div";
+        if (v4.y != 1) throw "Div";
     }
     int here = 0;
 }

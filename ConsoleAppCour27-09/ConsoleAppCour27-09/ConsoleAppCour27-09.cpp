@@ -13,6 +13,15 @@ struct Toto
     float x = 0.555f;
 };
 
+struct Vec2{
+    float x = 0;
+    float y = 0;
+};
+
+struct Vec3 : public Vec2 {
+    float z = 0;
+};
+
 int main()
 {
     struct Test
@@ -93,8 +102,6 @@ int main()
         int tab[] = { 66, 1, 2 ,3 };
         int* c = & tab[0];
         *c = 0;
-        *c++;
-        *++c;
         c++;
     }
 }

@@ -8,6 +8,7 @@
 
 #include "IntArray.hpp"
 #include "Vec.hpp"
+#include "LinkedListExo.hpp"
 
 using namespace std;
 
@@ -109,6 +110,7 @@ void TestArray()
         for (int i = 0; i < a.getSize(); i++) {
             a.set(i, i * i);
             printf("% d", a.get(i));
+            printf("\n");
         }
         a.insertOrderInferior(5);
         a.insertOrderInferior(54);
@@ -204,6 +206,28 @@ int main()
         assert(StrLen(str1) == 6);
         assert(Countc(str1, 'a') == 3);
         StrCpy(str256, str2);
+
+        int here = 0;
+    }
+
+
+    {
+        LinkedListInt list;
+        list.insert(2);
+        list.insert(4);
+        list.insert(1);
+        list.insert(9); 
+        list.insert(7);
+        list.insert(8);
+
+        list.print();
+
+        list.remove(4);
+        list.remove(9);
+        list.remove(8);
+        list.remove(2);
+
+        list.print();
 
         int here = 0;
     }

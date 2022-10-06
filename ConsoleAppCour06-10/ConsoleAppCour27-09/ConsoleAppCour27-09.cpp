@@ -189,10 +189,11 @@ public:
         data = newData;
         size = nuSize;
         delete[] newData;
+
     };
 
     void shiftRight(int targetIdx) {
-        resize(getSize() + 1);
+        resize(size++);
         for (int i = size; i > targetIdx; i--)
             data[i] = data[i--];
     }
@@ -255,22 +256,13 @@ void TestArray()
         IntArray a(8);
         for (int i = 0; i < 8; i++)
             a.set(i, i * i);
-        int verif = 0;
-
         a.insertOrderInferior(5);
-
-        int check = 0;
             //normalement on a une fonction predicate qui vérifie si l'invariant(tableau triée) est satisfait
-        check = a.get(0);
-        check = a.get(1);
-        check = a.get(2);
-        check = a.get(3);
-        check = a.get(4);
-        //assert(a.get(0) == 0);
-        //assert(a.get(1) == 1);
-        //assert(a.get(2) == 4);
-        //assert(a.get(3) == 5);
-        //assert(a.get(4) == 9);
+        assert(a.get(0) == 0);
+        assert(a.get(1) == 1);
+        assert(a.get(2) == 4);
+        assert(a.get(3) == 5);
+        assert(a.get(4) == 9);
 
         int here = 0;
     }

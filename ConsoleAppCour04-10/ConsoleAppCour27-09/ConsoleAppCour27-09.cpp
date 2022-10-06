@@ -6,94 +6,10 @@
 #include <string>
 #include <unordered_map>
 
+#include "IntArray.hpp"
+#include "Vector.hpp"
+
 using namespace std;
-
-struct Vec2{
-    float x = 0;
-    float y = 0;
-    Vec2(){}
-    Vec2(float _x, float _y) {
-        x = _x;
-        y = _y;
-    }
-
-    void add(Vec2 v) {
-        x += v.x;
-        y += v.y;
-    }
-
-    void addRef(Vec2& v) {
-        x += v.x;
-        y += v.y;
-    }
-
-    void addPtr(Vec2 * v) {
-        x += v->x;
-        y += v->y;
-    }
-};
-
-struct Vec3 : public Vec2 {
-    float z = 0;
-
-    Vec3() {}
-
-    Vec3(float _x, float _y, float _z) : Vec2(_x, _y) { //le constructeur de V2 va faire son propre truc
-        z = _z;
-    }
-    
-    void add(Vec3 v) {
-        Vec2::add(v);
-        z += v.z;
-    }
-    void addRef(Vec3& v) { //façon idiomatique est d'ajouté const  : addRef(const Vec3& v) { const
-        Vec2::addRef(v);
-        z += v.z;
-    }
-    void addPtr(Vec3 * v) {
-        Vec2::addPtr(v);
-        z += v->z;
-    }
-};
-
-struct Vec4 {
-    float x = 0.0f;
-    float y = 0.0f;
-    float z = 0.0f;
-    float w = 0.0f;
-
-    Vec4() {}
-
-    Vec4(float _x, float _y, float _z, float _w){ 
-        x = _x;
-        y = _y;
-        z = _z;
-        w = _w;
-    }
-
-    Vec4 add(const Vec4& v) {
-        return Vec4(x + v.x, y + v.y, z + v.z, w + v.w);
-    }
-
-    Vec4 sub(const Vec4& v) {
-        return Vec4(x - v.x, y - v.y, z - v.z, w - v.w);
-    }
-
-    Vec4 mul(const Vec4& v) {
-        return Vec4(x * v.x, y * v.y, z * v.z, w * v.w);
-    }
-
-    Vec4 div(const Vec4& v) {
-        return Vec4(x / v.x, y / v.y, z / v.z, w / v.w);
-    }
-
-    void incr(const Vec4& v) {
-        x += v.x;
-        y += v.y;
-        z += v.z;
-        w += v.w;
-    }
-};
 
 void TestVec4()
 {
@@ -148,81 +64,6 @@ void TestVec4()
     }
 }
 
-class IntArray {
-public:
-
-    IntArray(int maxSize) {
-        //alloue data
-        data = new int[maxSize];
-        for (int i = 0; i < maxSize; i++) {
-            data[i] = 0;
-        }
-        size = maxSize;
-        //change taille reelle
-    };
-
-    int get(int idx) {
-        if (idx < 0) throw "out of bound exeption, bound cannot be inf to 0";
-        if (idx >= size) throw "out of bound exeption, bound cannot be sup to size";
-        return data[idx];
-    };
-    void set(int idx, int value) {
-        if (idx < 0) throw "out of bound exeption, bound cannot be inf to 0";
-        if (idx >= size) throw "out of bound exeption, bound cannot be sup to size";
-        data[idx] = value;
-    };
-    void resize(int nuSize) {
-        if (nuSize == size)
-            return;
-
-        bool grow = nuSize > size;
-
-        auto newData = new int[nuSize];
-        for (int i = 0; i < nuSize; i++)
-            newData[i] = 0;
-
-        int targetSize = (grow) ? size : nuSize;
-        for (int i = 0; i < targetSize; i++)
-            newData[i] = data[i];
-
-        int* odata = data;
-        data = newData;
-        size = nuSize;
-        delete[] newData;
-    };
-
-    void shiftRight(int targetIdx) {
-        resize(getSize() + 1);
-        for (int i = size; i > targetIdx; i--)
-            data[i] = data[i--];
-    }
-
-    void insertOrderInferior(int value)
-    {
-        int idx = 0;
-        while (data[idx] < value) {
-            idx++;
-        }
-
-        shiftRight(idx);
-
-        set(idx, value);
-    }
-
-    ~IntArray() {
-        delete[] data;
-        size = 0;
-    };
-
-    int getSize() {
-        return size;
-    };
-
-protected:
-    int* data = nullptr;
-    int size = 0;
-};
-
 static void assert(bool test) {
     if(!test) throw "assert";
 };
@@ -252,25 +93,41 @@ void TestArray()
     }
 
     {
-        IntArray a(8);
-        for (int i = 0; i < 8; i++)
+        IntArray a(5);
+        for (int i = 0; i < a.getSize(); i++) {
             a.set(i, i * i);
+            printf("% d", a.get(i));
+        }
+        printf("\n");
+        printf("% d\n", a.SearchOrderInferior(-1));
+        printf("% d\n", a.SearchOrderInferior(8));
+        printf("% d\n", a.SearchOrderInferior(22));
         int verif = 0;
-
+    }
+    {
+        IntArray a(5);
+        for (int i = 0; i < a.getSize(); i++) {
+            a.set(i, i * i);
+            printf("% d", a.get(i));
+        }
         a.insertOrderInferior(5);
+        a.insertOrderInferior(54);
+        a.insertOrderInferior(-5544);
 
-        int check = 0;
-            //normalement on a une fonction predicate qui vérifie si l'invariant(tableau triée) est satisfait
-        check = a.get(0);
-        check = a.get(1);
-        check = a.get(2);
-        check = a.get(3);
-        check = a.get(4);
-        //assert(a.get(0) == 0);
-        //assert(a.get(1) == 1);
-        //assert(a.get(2) == 4);
-        //assert(a.get(3) == 5);
-        //assert(a.get(4) == 9);
+        assert(a.IsSorted());
+        int here = 0;
+    }
+    {
+        IntArray b(5);
+        b.set(0, 5);
+        b.set(1, 3);
+        b.set(2, 9);
+        b.set(3, 8);
+        b.set(4, 1);
+
+        b.Sort();
+
+        int test = b.getSize();
 
         int here = 0;
     }

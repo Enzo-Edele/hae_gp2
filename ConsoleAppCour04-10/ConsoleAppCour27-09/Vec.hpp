@@ -8,10 +8,7 @@ struct Vec2 {
     float x = 0;
     float y = 0;
     Vec2() {}
-    Vec2(float _x, float _y) {
-        x = _x;
-        y = _y;
-    }
+    Vec2(float _x, float _y);
 
     void add(Vec2 v) {
         x += v.x;

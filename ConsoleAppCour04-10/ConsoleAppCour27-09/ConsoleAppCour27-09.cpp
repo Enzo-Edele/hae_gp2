@@ -7,7 +7,7 @@
 #include <unordered_map>
 
 #include "IntArray.hpp"
-#include "Vector.hpp"
+#include "Vec.hpp"
 
 using namespace std;
 

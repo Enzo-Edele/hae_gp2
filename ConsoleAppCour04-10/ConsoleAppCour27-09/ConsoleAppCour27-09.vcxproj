@@ -141,10 +141,11 @@
   <ItemGroup>
     <ClCompile Include="ConsoleAppCour27-09.cpp" />
     <ClCompile Include="FunctionIntArray.cpp" />
+    <ClCompile Include="FunctionVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IntArray.hpp" />
-    <ClInclude Include="Vector.hpp" />
+    <ClInclude Include="Vec.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

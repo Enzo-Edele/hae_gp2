@@ -100,3 +100,8 @@ void IntArray::Sort()
 {
     qsort(data, getSize(), sizeof(int), Comparator);
 }
+
+void IntArray::Add(int val) {
+    resize(getSize() + 1);
+    set(getSize() - 1, val);
+}

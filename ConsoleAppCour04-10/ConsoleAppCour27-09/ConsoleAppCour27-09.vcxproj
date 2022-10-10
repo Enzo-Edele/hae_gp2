@@ -143,9 +143,11 @@
     <ClCompile Include="FunctionIntArray.cpp" />
     <ClCompile Include="FunctionLinkedList.cpp" />
     <ClCompile Include="FunctionVector.cpp" />
+    <ClCompile Include="IntTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IntArray.hpp" />
+    <ClInclude Include="IntTree.hpp" />
     <ClInclude Include="LinkedListExo.hpp" />
     <ClInclude Include="Vec.hpp" />
   </ItemGroup>

@@ -34,6 +34,8 @@ public:
 
     void Sort();
 
+    void Add(int val);
+
 protected:
     int* data = nullptr;
     int size = 0;

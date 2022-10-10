@@ -9,6 +9,7 @@
 #include "IntArray.hpp"
 #include "Vec.hpp"
 #include "LinkedListExo.hpp"
+#include "IntTree.hpp"
 
 using namespace std;
 
@@ -193,10 +194,58 @@ void StrCpy(char* nstr, const char* str, int nchars) {
     
 }
 
+void TestLinkedList() {
+    LinkedListInt list;
+    list.insert(2);
+    list.insert(4);
+    list.insert(1);
+    list.insert(9);
+    list.insert(7);
+    list.insert(8);
+
+    list.print();
+
+    list.remove(4);
+    list.remove(9);
+    list.remove(8);
+    list.remove(2);
+
+    list.print();
+
+    int here = 0;
+}
+
+static void TestTree() {
+    IntTreeController r;
+
+    r.insert(2);
+    r.insert(1);
+    r.insert(13);
+    r.insert(-5);
+    r.insert(666);
+    r.insert(86);
+    r.insert(-7);
+    r.insert(42);
+    r.insert(2077);
+    r.insert(4);
+
+    r.print();
+
+    r.remove(13);
+    //r.remove(4);
+
+    printf("\n");
+    r.print();
+
+    int here = 0;
+}
+
 int main()
 {
     TestVec4();
     TestArray();
+    TestLinkedList();
+    TestTree();
 
     {
         char str1[] = { "abcaya" };
@@ -206,28 +255,6 @@ int main()
         assert(StrLen(str1) == 6);
         assert(Countc(str1, 'a') == 3);
         StrCpy(str256, str2);
-
-        int here = 0;
-    }
-
-
-    {
-        LinkedListInt list;
-        list.insert(2);
-        list.insert(4);
-        list.insert(1);
-        list.insert(9); 
-        list.insert(7);
-        list.insert(8);
-
-        list.print();
-
-        list.remove(4);
-        list.remove(9);
-        list.remove(8);
-        list.remove(2);
-
-        list.print();
 
         int here = 0;
     }

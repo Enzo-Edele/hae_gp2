@@ -6,10 +6,12 @@
 #include <string>
 #include <unordered_map>
 
+
 #include "IntArray.hpp"
 #include "Vec.hpp"
 #include "LinkedListExo.hpp"
 #include "IntTree.hpp"
+#include "FloatArray.hpp"
 
 using namespace std;
 
@@ -218,7 +220,7 @@ void TestLinkedList() {
 static void TestTree() {
     IntTreeController r;
 
-    r.insert(2);
+    /*r.insert(2);
     r.insert(1);
     r.insert(13);
     r.insert(-5);
@@ -228,11 +230,27 @@ static void TestTree() {
     r.insert(42);
     r.insert(2077);
     r.insert(4);
+    r.insert(-17);
+    r.insert(-10);*/
+
+    clock_t now = clock();
+
+    srand (now);
+
+    for (int i = 0; i < 10; i++) {
+        r.insert(rand() % 20 - 10);
+    }
 
     r.print();
 
-    r.remove(13);
-    //r.remove(4);
+    //for (auto v: r) {
+    //    r.remove(v);
+    //}
+
+    r.print();
+
+    r.remove(5);
+    r.remove(3);
 
     printf("\n");
     r.print();
@@ -240,12 +258,57 @@ static void TestTree() {
     int here = 0;
 }
 
+void testCour1(){
+    //tableau 150 élem
+    int tabStatic[150]; //static local sera détruit une fois hors fonction
+
+    int* tabDynamique = nullptr; //dynamique gloabal sera pas détruit une fois hors fonction
+    tabDynamique = new int[150];
+
+    //tableau de carré 
+    for (int i = 0; i < 150; i++)
+    {
+        tabStatic[i] = i * i;
+    }
+
+    //afficher à l'nvers
+    for (int i = 149; i >= 0; i--) {
+        printf("%d \n", tabStatic[i]);
+    }
+
+    FloatArray tabArray(5);
+
+    tabArray.pushFirst(1);
+    tabArray.pushFirst(2);
+    //tabArray.set(3, 4);
+    tabArray.pushFirst(3);
+
+    tabArray.print();
+
+    tabArray.pushLast(8);
+
+    tabArray.print();
+
+    tabArray.pushLast(9);
+    tabArray.pushLast(10);
+
+    tabArray.print();
+
+    auto maFunction = [](int val) {
+        //printf("%f ", val);
+        cout << std::to_string(val) << " ";
+    };
+
+    tabArray.iter(maFunction);
+}
+
 int main()
 {
-    TestVec4();
-    TestArray();
-    TestLinkedList();
-    TestTree();
+    //TestVec4();
+    //TestArray();
+    //TestLinkedList();
+    //TestTree();
+    testCour1();
 
     {
         char str1[] = { "abcaya" };

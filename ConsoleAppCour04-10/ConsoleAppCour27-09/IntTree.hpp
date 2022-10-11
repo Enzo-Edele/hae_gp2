@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IntArray.hpp"
-#include "IntTree.hpp"
 
 class IntTree {
 public:
@@ -14,8 +13,12 @@ public:
 	IntTree* remove(int val, IntTree* root);
 	void print();
 
-	void reinsert(IntTree* root);
-	void reinsert(IntArray* tab);
+	IntTree* reinsert(IntTree* root);
+	IntTree* reinsert(IntArray* tab);
+
+	~IntTree() {
+		printf("Node Delete, \n");
+	}
 };
 
 class IntTreeController {

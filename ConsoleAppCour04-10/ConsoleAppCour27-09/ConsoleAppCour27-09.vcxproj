@@ -140,12 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleAppCour27-09.cpp" />
+    <ClCompile Include="FloatArray.cpp" />
     <ClCompile Include="FunctionIntArray.cpp" />
     <ClCompile Include="FunctionLinkedList.cpp" />
     <ClCompile Include="FunctionVector.cpp" />
     <ClCompile Include="IntTree.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FloatArray.hpp" />
     <ClInclude Include="IntArray.hpp" />
     <ClInclude Include="IntTree.hpp" />
     <ClInclude Include="LinkedListExo.hpp" />

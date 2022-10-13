@@ -12,6 +12,8 @@
 #include "LinkedListExo.hpp"
 #include "IntTree.hpp"
 #include "FloatArray.hpp"
+#include "Lib.hpp"
+#include "StringTree.hpp"
 
 using namespace std;
 
@@ -300,7 +302,68 @@ void testCour1(){
     };
 
     tabArray.iter(maFunction);
+
+    float totalSum = 0;
+    auto sumFunction = [&totalSum](float val) {
+         totalSum += val;
+    };
+
+    tabArray.iter(sumFunction);
+    printf("\n %f", totalSum);
+    float abc[3] = { 1, 3, 5 };
+    FloatArray f = FloatArray::fromArray(abc, 3);
+    f.print();
 }
+
+void TestLib() {
+    char sapin[29] = "sapinchateignererableplatane";
+    char buffer[512] = {};
+
+    Lib::Memcpy(buffer, sapin, 29);
+
+    printf(buffer);
+    printf("\n");
+
+    char src ='r';
+    char* srcStr = (char*)"igne";
+
+    const char* test = Lib::StrChr(sapin, src);
+    printf("\n");
+    printf(test); //marche pas
+
+    char* magnet = Lib::StrStr(sapin, srcStr);
+    printf("\n");
+    printf(magnet);
+
+    int here = 0;
+}
+
+void TestStringTree() {
+    StringTreeControler tree;
+
+    tree.insert((char*)"miku");
+    tree.insert((char*)"astolfo");
+    tree.insert((char*)"mami");
+    tree.insert((char*)"plum");
+    tree.insert((char*)"Star Wars 1 2 3");
+    tree.insert((char*)"lena");
+    tree.insert((char*)"itchika");
+    tree.insert((char*)"Star Wars 7 8 9");
+
+    tree.print();
+
+    tree.remove((char*)"Star Wars 7 8 9");
+    tree.remove((char*)"itchika");
+    tree.remove((char*)"mami");
+
+    tree.remove((char*)"plum");
+    tree.remove((char*)"miku");
+    tree.remove((char*)"lena");
+
+    tree.print();
+
+    int here = 0;
+};
 
 int main()
 {
@@ -308,7 +371,9 @@ int main()
     //TestArray();
     //TestLinkedList();
     //TestTree();
-    testCour1();
+    //testCour1();
+    //TestLib();
+    TestStringTree();
 
     {
         char str1[] = { "abcaya" };

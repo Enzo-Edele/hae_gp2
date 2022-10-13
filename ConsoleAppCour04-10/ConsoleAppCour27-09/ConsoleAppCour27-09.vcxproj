@@ -145,12 +145,15 @@
     <ClCompile Include="FunctionLinkedList.cpp" />
     <ClCompile Include="FunctionVector.cpp" />
     <ClCompile Include="IntTree.cpp" />
+    <ClCompile Include="StringTree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FloatArray.hpp" />
     <ClInclude Include="IntArray.hpp" />
     <ClInclude Include="IntTree.hpp" />
+    <ClInclude Include="Lib.hpp" />
     <ClInclude Include="LinkedListExo.hpp" />
+    <ClInclude Include="StringTree.hpp" />
     <ClInclude Include="Vec.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

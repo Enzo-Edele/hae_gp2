@@ -13,13 +13,16 @@ public:
 	StringTree* remove(char* val);
 	void print();
 
+	void findstring(char* strscr);
+	void findprfstring(char* prf);
+
 	int compareString(char* tested, char* src);
 
 	int compareStringSame(char* tested, char* src);
 
 	~StringTree() 
 	{
-		printf("Leaf Delete, \n");
+		//printf("Leaf Delete, \n");
 	}
 };
 
@@ -37,6 +40,7 @@ public:
 	}
 
 	void remove(char* str) {
+		//printf("Start remove : \n");
 		root = root->remove(str);
 	}
 
@@ -44,5 +48,13 @@ public:
 		if (root)
 			root->print();
 		printf("\n");
+	}
+
+	void findstring(char* strscr) {
+		root->findstring(strscr);
+	}
+
+	void findprfstring(char* prf) {
+		root->findprfstring(prf);
 	}
 };

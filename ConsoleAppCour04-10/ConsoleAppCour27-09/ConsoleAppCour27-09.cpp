@@ -341,26 +341,54 @@ void TestLib() {
 void TestStringTree() {
     StringTreeControler tree;
 
-    tree.insert((char*)"miku");
-    tree.insert((char*)"astolfo");
-    tree.insert((char*)"mami");
-    tree.insert((char*)"plum");
-    tree.insert((char*)"Star Wars 1 2 3");
-    tree.insert((char*)"lena");
-    tree.insert((char*)"itchika");
-    tree.insert((char*)"Star Wars 7 8 9");
+    tree.insert((char*)"meme");
+    tree.insert((char*)"tutu");
+    tree.insert((char*)"xoxo");
+    tree.insert((char*)"tata");
+    tree.insert((char*)"ababa");
+    tree.insert((char*)"ete");
+    tree.insert((char*)"papa");
+    tree.insert((char*)"papaParis");
 
     tree.print();
 
-    tree.remove((char*)"Star Wars 7 8 9");
-    tree.remove((char*)"itchika");
-    tree.remove((char*)"mami");
+    tree.remove((char*)"meme");
+    tree.remove((char*)"xoxo");
+    tree.remove((char*)"ababa");
+    tree.remove((char*)"ete");
+    tree.remove((char*)"papa");
+    tree.remove((char*)"tata");
+    tree.remove((char*)"tutu");
+    tree.remove((char*)"papaParis");
 
-    tree.remove((char*)"plum");
-    tree.remove((char*)"miku");
-    tree.remove((char*)"lena");
+    //tree.remove((char*)"plum");
+    //tree.remove((char*)"miku");
+    //tree.remove((char*)"lena");
 
     tree.print();
+
+    tree.insert((char*)"steak");
+    tree.insert((char*)"musique");
+    tree.insert((char*)"fisc");
+    tree.insert((char*)"StarWarsUnDeuxTrois");
+    tree.insert((char*)"RAM");
+    tree.insert((char*)"StarWarssepthuitneuf");
+    tree.insert((char*)"sucre");
+    tree.insert((char*)"ursaf");
+    tree.insert((char*)"sfr");
+
+    tree.print();
+
+    tree.findprfstring((char*)"st");
+
+    tree.remove((char*)"ursaf");
+    tree.remove((char*)"fisc");
+    tree.remove((char*)"StarWarssepthuitneuf");
+    tree.remove((char*)"sfr");
+
+    tree.print();
+
+    tree.findstring((char*)"musique");
 
     int here = 0;
 };

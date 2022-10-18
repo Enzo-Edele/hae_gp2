@@ -14,6 +14,7 @@
 #include "FloatArray.hpp"
 #include "Lib.hpp"
 #include "StringTree.hpp"
+#include "StringTreesDav.hpp"
 
 using namespace std;
 
@@ -319,7 +320,7 @@ void TestLib() {
     char sapin[29] = "sapinchateignererableplatane";
     char buffer[512] = {};
 
-    Lib::Memcpy(buffer, sapin, 29);
+    Lib::MemcpyRec(buffer, sapin, 29);
 
     printf(buffer);
     printf("\n");
@@ -328,18 +329,19 @@ void TestLib() {
     char* srcStr = (char*)"igne";
 
     const char* test = Lib::StrChr(sapin, src);
+    
+    printf(test);
     printf("\n");
-    printf(test); //marche pas
 
     char* magnet = Lib::StrStr(sapin, srcStr);
-    printf("\n");
     printf(magnet);
+    printf("\n");
 
     int here = 0;
 }
 
 void TestStringTree() {
-    StringTreeControler tree;
+    StringTreeDavControler tree;
 
     tree.insert((char*)"meme");
     tree.insert((char*)"tutu");
@@ -379,7 +381,7 @@ void TestStringTree() {
 
     tree.print();
 
-    tree.findprfstring((char*)"st");
+    tree.findprfstring((char*)"si");
 
     tree.remove((char*)"ursaf");
     tree.remove((char*)"fisc");
@@ -400,7 +402,7 @@ int main()
     //TestLinkedList();
     //TestTree();
     //testCour1();
-    //TestLib();
+    TestLib();
     TestStringTree();
 
     {

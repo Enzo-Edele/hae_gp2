@@ -4,7 +4,7 @@
 
 class StringTree {
 public:
-	char* str;
+	char* str = nullptr;
 
 	StringTree* left = nullptr;
 	StringTree* right = nullptr;
@@ -16,9 +16,8 @@ public:
 	void findstring(char* strscr);
 	void findprfstring(char* prf);
 
-	int compareString(char* tested, char* src);
-
-	int compareStringSame(char* tested, char* src);
+	int compareString(char* tested, char* src); //la faire static
+	int compareStringSame(char* tested, char* src); //la faire static
 
 	~StringTree() 
 	{
@@ -40,7 +39,6 @@ public:
 	}
 
 	void remove(char* str) {
-		//printf("Start remove : \n");
 		root = root->remove(str);
 	}
 

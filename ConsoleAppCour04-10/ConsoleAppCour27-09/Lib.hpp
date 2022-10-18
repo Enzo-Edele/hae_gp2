@@ -9,50 +9,27 @@ public:
 		}
 	}
 
-	static const char* StrChr(const char* grange, char chat)
+	static const char* StrChr(const char* src, char c)
 	{
-		char *ptr = new char[512];
-		while (*grange)
+		while (*src && *src != c)
 		{
-			if (*grange == chat)
-			{
-				int idx = 0;
-				while (*grange)
-				{
-					ptr[idx] = *grange;
-					*grange++;
-					idx++;
-				}
-				//printf(*ptr, "\n");
-				return ptr; //cast marche pas
-			}
-			grange++;
+			src++;
 		}
-		return nullptr;
+		if(!src)
+			return nullptr;
+
+		return src;
 	};
 
 	static char* StrStr(char* meuleDeFoin, char* aiguille) {
-		char* ptr = new char[512];
-		char* limite = meuleDeFoin;
-		limite += strlen(aiguille);
-		while (*limite)
+		while (*meuleDeFoin && !compareStr(meuleDeFoin, aiguille))
 		{
-			if (compareStr(meuleDeFoin, aiguille))
-			{
-				int idx = 0;
-				while (*meuleDeFoin)
-				{
-					ptr[idx] = *meuleDeFoin;
-					*meuleDeFoin++;
-					idx++;
-				}
-				//printf(*ptr);
-				return ptr; //return marche pas
-			}
-			limite++;
 			meuleDeFoin++;
 		}
-		return nullptr;
+		if(!meuleDeFoin)
+			return nullptr;
+
+		return meuleDeFoin;
 	};
 
 	static bool compareStr(char* tested, char* src) {
@@ -66,5 +43,15 @@ public:
 			*src++;
 		}
 		return test;
+	}
+
+	static void MemcpyRec(char* dest, const char* src, int size, int idx = 0) {
+		if (idx < size) {
+			dest[idx] = src[idx];
+			src++;
+			dest++;
+			idx++;
+			MemcpyRec(dest, src, size, idx);
+		}
 	}
 };

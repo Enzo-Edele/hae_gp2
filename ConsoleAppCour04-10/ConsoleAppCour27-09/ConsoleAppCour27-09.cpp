@@ -320,7 +320,10 @@ void TestLib() {
     char sapin[29] = "sapinchateignererableplatane";
     char buffer[512] = {};
 
-    Lib::MemcpyRec(buffer, sapin, 29);
+    int tab[15] = { 1,2,3,0,5,4,1,2,3,0,5,4 ,1,2,3 };
+    int bufferTab[512] = {};
+
+    Lib::MemCpyRec(buffer, sapin, 29);
 
     printf(buffer);
     printf("\n");
@@ -328,12 +331,12 @@ void TestLib() {
     char src ='r';
     char* srcStr = (char*)"igne";
 
-    const char* test = Lib::StrChr(sapin, src);
+    const char* test = Lib::StrChrRec(sapin, src);
     
     printf(test);
     printf("\n");
 
-    char* magnet = Lib::StrStr(sapin, srcStr);
+    char* magnet = Lib::StrStrRec(sapin, srcStr);
     printf(magnet);
     printf("\n");
 
@@ -381,7 +384,9 @@ void TestStringTree() {
 
     tree.print();
 
-    tree.findprfstring((char*)"si");
+    tree.findprfstring((char*)"eak");
+    tree.findprfstring((char*)"us");
+    tree.findprfstring((char*)"is");
 
     tree.remove((char*)"ursaf");
     tree.remove((char*)"fisc");

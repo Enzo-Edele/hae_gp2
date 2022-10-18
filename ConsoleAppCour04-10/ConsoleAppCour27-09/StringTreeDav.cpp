@@ -146,7 +146,7 @@ bool StringTreeDav::strPrefixeCompare(std::string src, std::string prefix) {
 
 bool StringTreeDav::strPaternCompare(std::string src, std::string prefix) {
 	bool test = true;
-	for (int i = 0; i < src.size() - prefix.size(); i++) {
+	for (int i = 0; i < src.size() - prefix.size() + 1; i++) {
 		test = true;
 		for (int y = 0; y < prefix.size(); y++)
 		{

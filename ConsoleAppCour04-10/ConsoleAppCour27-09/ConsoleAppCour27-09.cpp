@@ -15,6 +15,7 @@
 #include "Lib.hpp"
 #include "StringTree.hpp"
 #include "StringTreesDav.hpp"
+#include "Recurrence.hpp"
 
 using namespace std;
 
@@ -319,6 +320,7 @@ void testCour1(){
 void TestLib() {
     char sapin[29] = "sapinchateignererableplatane";
     char buffer[512] = {};
+    char lapin[6] = "lapin";
 
     int tab[15] = { 1,2,3,0,5,4,1,2,3,0,5,4 ,1,2,3 };
     int bufferTab[512] = {};
@@ -339,6 +341,20 @@ void TestLib() {
     char* magnet = Lib::StrStrRec(sapin, srcStr);
     printf(magnet);
     printf("\n");
+
+    printf("%i \n", Lib::StrlenRec(sapin));
+    printf("\n");
+
+    assert(0 == Lib::StrCmp(lapin, "lapin"));
+    assert(-1 == Lib::StrCmp(lapin, "lapinou"));
+    assert(1 == Lib::StrCmp(lapin, "lapi"));
+    assert(1 == Lib::StrCmp(lapin, "dauphin"));
+    assert(-1 == Lib::StrCmp(lapin, "zébre"));
+    printf("%i \n",Lib::StrCmp(lapin, "lapin"));
+    printf("%i \n", Lib::StrCmp(lapin, "lapinou"));
+    printf("%i \n", Lib::StrCmp(lapin, "lapi"));
+    printf("%i \n", Lib::StrCmp(lapin, "dauphin"));
+    printf("%i \n", Lib::StrCmp(lapin, "zébre"));
 
     int here = 0;
 }
@@ -400,6 +416,41 @@ void TestStringTree() {
     int here = 0;
 };
 
+void TestRecurrence() {
+    int a = 5;
+    int b = -3;
+    int c = 0;
+    c = Recurrence::Add(a, b);
+    assert(c == 2);
+    c = Recurrence::Add(a, -b);
+    assert(c == 8);
+
+    c = Recurrence::Sub(a, b);
+    assert(c == 8);
+    c = Recurrence::Sub(a, -b);
+    assert(c == 2);
+
+    c = Recurrence::Mul(a, -b);
+    assert(c == 15);
+    c = Recurrence::Mul(0, 1);
+    assert(c == 0);
+    c = Recurrence::Mul(1, 0);
+    assert(c == 0);
+    c = Recurrence::Mul(1, 2);
+    assert(c == 2);
+    c = Recurrence::Mul(2, 8);
+    assert(c == 16);
+    c = Recurrence::Mul(-2, 8);
+    assert(c == -16);
+    c = Recurrence::Mul(-2, -2);
+    assert(c == 4);
+
+    assert(0 == Recurrence::Div(0, 1));
+    assert(0 == Recurrence::Div(1, 0));
+    assert(3 == Recurrence::Div(6, 2));
+    assert(2 == Recurrence::Div(4, 2));
+}
+
 int main()
 {
     //TestVec4();
@@ -408,7 +459,8 @@ int main()
     //TestTree();
     //testCour1();
     TestLib();
-    TestStringTree();
+    //TestStringTree();
+    //TestRecurrence();
 
     {
         char str1[] = { "abcaya" };

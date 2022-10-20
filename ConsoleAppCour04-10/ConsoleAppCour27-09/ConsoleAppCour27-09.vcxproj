@@ -155,6 +155,7 @@
     <ClInclude Include="IntTree.hpp" />
     <ClInclude Include="Lib.hpp" />
     <ClInclude Include="LinkedListExo.hpp" />
+    <ClInclude Include="Recurrence.hpp" />
     <ClInclude Include="StringTree.hpp" />
     <ClInclude Include="StringTreesDav.hpp" />
     <ClInclude Include="Vec.hpp" />

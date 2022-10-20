@@ -70,31 +70,97 @@ public:
 		MemCpyRec(dest + 1, src + 1, size - 1);
 		//combine
 
-		//
+		//on retourne
 		return;
 	}
 
 	static const char* StrChrRec(const char* src, char c)
 	{
-		if (*src == c)
-			return src;
-		if (src && *src != c) {
-			*src++;
-			StrChrRec(src, c);
-		}
-		else
+		//cas initial
+		if (!*src)
 			return nullptr;
+		//cas recurrent
+		if (*src == c) {
+			return src;
+		}
+		return StrChrRec(src + 1, c);
+		//combine
+
+		//
 	};
 
+	static bool StrStrRecPref(const char* src, const char* c) {
+
+	}
+
 	static char* StrStrRec(char* meuleDeFoin, char* aiguille) { //marche aussi pour le string tree prefixe et patern
-		if(compareStr(meuleDeFoin, aiguille))
-			return meuleDeFoin;
-		if (*meuleDeFoin && !compareStr(meuleDeFoin, aiguille))
-		{
-			meuleDeFoin++;
-			StrStrRec(meuleDeFoin, aiguille);
-		}
-		else
+		//cas initial
+		if (meuleDeFoin == nullptr) {
 			return nullptr;
+		}
+		if(*meuleDeFoin == 0) {
+			return *aiguille ? meuleDeFoin : nullptr;
+		}
+		//cas recurrent
+		if (compareStr(meuleDeFoin, aiguille)) {
+			return meuleDeFoin;
+		}
+		return StrStrRec(meuleDeFoin + 1, aiguille);
 	};
+
+	static int StrlenRec(const char* str) { //check 
+		if (!*str)
+			return 0;
+		else
+		{
+			str++;
+			return 1 + StrlenRec(str);
+		}
+	}
+
+	static void StrCpyRec(char* dest, const char* src) {
+		if (!*src){
+			return;
+		}
+		if(*src )
+		{
+			*dest = *src;
+			StrCpyRec(dest + 1, src + 1);
+		}
+	}
+
+	static void StrnCpyRec(char* dest, const char* src, int charMaxCpy) {
+		if (!*src) {
+			return;
+		}
+		if (charMaxCpy == 0)
+			return;
+		if (*src)
+		{
+			*dest = *src;
+			StrnCpyRec(dest + 1, src + 1, charMaxCpy -1);
+		}
+	}
+
+	static void ZeroMemory(char* dest, int nbBytes) {
+		if (nbBytes <= 0) return;
+		if (!dest) return;
+
+		*dest = 0;
+		ZeroMemory(dest + 1, nbBytes - 1);
+	}
+	static int StrCmp(const char* str1, const char* str2) {
+		if (!*str1 && !*str2)
+			return 0;
+		if (!*str1)
+			return -1;
+		if (!*str2)
+			return 1;
+		if (*str1 < *str2)
+			return -1;
+		if (*str1 > *str2)
+			return 1;
+
+		return StrCmp(str1 + 1, str2 + 1);
+	}
 };

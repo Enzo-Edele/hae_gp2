@@ -140,6 +140,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleAppCour27-09.cpp" />
+    <ClCompile Include="Int64Array.cpp" />
+    <ClCompile Include="Int64ArrayRedo.cpp" />
+    <ClCompile Include="Lib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Int64Array.hpp" />
+    <ClInclude Include="Int64ArrayRedo.hpp" />
+    <ClInclude Include="Lib.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

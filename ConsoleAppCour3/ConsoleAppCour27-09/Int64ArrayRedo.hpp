@@ -1,9 +1,19 @@
 #pragma once
 
-#include <cstdlib>;
-#include <cstdint>;
-#include <string>;
+#include <cstdlib>
+#include <cstdint>
+#include <string>
 #include "Lib.hpp"
+
+static int Comparator(const void* ptr1, const void* ptr2) {
+	int64_t* first = (int64_t*)ptr1;
+	int64_t* second = (int64_t*)ptr2;
+
+	int64_t val1 = *first;
+	int64_t val2 = *second;
+
+	return (int)(val1 - val2);
+}
 
 class Int64ArrayRedo {
 public:
@@ -30,7 +40,7 @@ public:
 
 	void Ensure(int size) {
 		if (allocSize < size) {
-			int reallocSize = allocSize + allocSize * 0.5;
+			int reallocSize = std::max<int>(allocSize * 1.5, size);
 			data = (int64_t*)realloc(data, reallocSize * sizeof(int64_t));
 			SetZero(allocSize, reallocSize);
 			allocSize = reallocSize;
@@ -90,7 +100,7 @@ public:
 	void FillWithRandom(int nbElem) {
 		if (nbElem <= 0)
 			return;
-		PushFront(rand() % 10 + 1);
+		PushFront(rand());
 		FillWithRandom(nbElem - 1);
 	}
 protected:
@@ -165,7 +175,7 @@ public:
 			return;
 		//insérer
 		in.Insert(pos, elem);
-		in.print(0);
+		//in.print(0);
 		AddElementInSortedArray(start + 1, in);
 	}
 
@@ -210,26 +220,64 @@ public:
 		};
 	}
 
+	int SequentialSearch(int64_t elem)
+	{
+		for (int i = 0; i < Size(); i++)
+		{
+			if (data[i] == elem) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	void QSort() {
+		qsort(data, Size(), sizeof(int64_t), Comparator);
+	}
+
 	int BinarySearch(int64_t elem) {
 		return binarySearch(elem, Size(), 0);
 	}
 
+	int BinarySearchIt(int64_t elem) {
+		int min = 0;
+		int max = Size();
+		int pos = 0;
+		while (min < max && data[pos] != elem)
+		{
+			pos = (min + max) / 2;
+			if (data[pos] < elem)
+				max = pos - 1;
+			if (data[pos] > elem)
+				min = pos + 1;
+		}
+		if (data[pos] = elem)
+			return pos;
+		else
+			return -1;
+	}
+
 protected:
-	int binarySearch(int64_t elem, int max, int min = 0) {
+	int binarySearch(int64_t elem, int max, int min = 0) { //inverser min et max et un nid a bug future
 		//cas pas find
-		if (min == max || min > max)
+		if (min > max)
 			return -1;
 
-		int pos = (int)(min + max) / 2;
+		int pos = (min + max) / 2;
+
 		//cas find
+		if (data[min] == elem)
+			return min;
 		if (data[pos] == elem)
 			return pos;
+		if (data[max] == elem)
+			return max;
 		//cas inf
 		if (data[pos] < elem)
-			return binarySearch(elem, pos - 1, min);
+			return binarySearch(elem, pos - 1, min + 1);
 		//cas sup
 		if (data[pos] > elem)
-			return binarySearch(elem, max, pos + 1);
+			return binarySearch(elem, max - 1, pos + 1);
 	}
 
 	void SetZero(int start, int end) {

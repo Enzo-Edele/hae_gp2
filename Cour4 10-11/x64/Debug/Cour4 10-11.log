@@ -1,2 +1,9 @@
 ﻿  ConsoleAppCour4.cpp
-  Cour4 10-11.vcxproj -> C:\Git\hae_gp2\Cour4 10-11\x64\Debug\Cour4 10-11.exe
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(34,10): error C2039: 'cout' n'est pas membre de 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(25): message : voir la déclaration de 'std'
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(34,15): error C2065: 'cout' : identificateur non déclaré
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(34,23): error C2039: 'filesys' n'est pas membre de 'std'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\map(25): message : voir la déclaration de 'std'
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(36,5): error C2065: 'filesys' : identificateur non déclaré
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(36,5): error C2143: erreur de syntaxe : absence de ';' avant 'while'

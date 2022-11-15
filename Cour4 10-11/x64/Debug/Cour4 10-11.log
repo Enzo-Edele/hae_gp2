@@ -1,2 +1,29 @@
 ﻿  ConsoleAppCour4.cpp
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(11,11): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(12,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(14,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(15,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(16,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(23,66): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(23,30): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\Line.hpp(21,1): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(105,47): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(119,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(119,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(120,23): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(123,27): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(192,32): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Cour4 10-11.vcxproj -> C:\Git\hae_gp2\Cour4 10-11\x64\Debug\Cour4 10-11.exe

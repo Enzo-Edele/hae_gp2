@@ -1,29 +1,61 @@
 ﻿  ConsoleAppCour4.cpp
   The contents of <filesystem> are available only with C++17 or later.
-C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(11,11): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(12,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(9,11): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(10,12): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(12,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(13,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
 C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(14,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(15,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(16,1): warning C4244: '+=' : conversion de 'double' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(23,66): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(21,66): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
           with
           [
               T=float
           ]
-C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(23,30): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\CatMull.hpp(21,30): warning C4244: 'argument' : conversion de 'double' en 'T', perte possible de données
           with
           [
               T=float
           ]
-C:\Git\hae_gp2\Cour4 10-11\Line.hpp(21,1): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(105,47): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\Line.hpp(60,1): warning C4267: '=' : conversion de 'size_t' en 'int', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(106,47): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(119,38): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(119,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(120,23): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(123,27): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
-C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(192,32): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(130,1): warning C4305: '+=' : troncation de 'double' à 'float'
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(143,41): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(144,23): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(147,27): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(193,22): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(240,31): warning C4244: '=' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(259,107): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(261,72): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(267,25): warning C4244: '/=' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(268,25): warning C4244: '/=' : conversion de 'double' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(272,26): warning C4244: '=' : conversion de 'double' en 'int', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(274,27): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\Cour4 10-11\ConsoleAppCour4.cpp(284,32): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
   Cour4 10-11.vcxproj -> C:\Git\hae_gp2\Cour4 10-11\x64\Debug\Cour4 10-11.exe

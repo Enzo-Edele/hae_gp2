@@ -5,8 +5,6 @@
 
 class CatMull {
 public: 
-
-
 	static inline double Polynom(double p0, double p1, double p2, double p3, double t) {
 		float q = 2.0 * p1;
 		float t2 = t * t;

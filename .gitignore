@@ -18,6 +18,10 @@
 /Cour4 10-11/Debug
 /Cour4 10-11/x64/Debug
 
+/SFML Perso/.vs
+/SFML Perso/Debug
+/SFML Perso/x64
+
 
 # Prerequisites
 *.d

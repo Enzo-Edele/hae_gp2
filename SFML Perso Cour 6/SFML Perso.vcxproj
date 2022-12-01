@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Catmull.hpp" />
     <ClInclude Include="Comande.hpp" />
+    <ClInclude Include="CommandeFile.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Lib.hpp" />

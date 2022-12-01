@@ -22,6 +22,10 @@
 /SFML Perso/Debug
 /SFML Perso/x64
 
+/SFML Perso Cour 6/.vs
+/SFML Perso Cour 6/Debug
+/SFML Perso Cour 6/x64
+
 
 # Prerequisites
 *.d

@@ -93,7 +93,7 @@ public:
 	}
 
 	bool ReplayComandeInterpole(Cmd& cmd) {
-		int speed = 1;
+		int speed = 5;
 		switch (cmd.id) {
 		case CmdId::Advance:     Advance(speed);     break;
 		case CmdId::RotateLeft:  RotateLeft(speed);  break;

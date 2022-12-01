@@ -16,6 +16,7 @@
 #include "World.hpp"
 #include "Particles.hpp"
 #include "Comande.hpp"
+#include "CommandeFile.hpp"
 
 using namespace sf;
 
@@ -26,6 +27,7 @@ static std::vector<Color> colors = {Color(0xFF2000ff), Color(0xFF790Bff), Color(
 };
 
 Turtle* turtle;
+
 int speed = 1;
 
 void TestCour6(){
@@ -49,18 +51,20 @@ void TestCour6(){
             if (event.type == Event::KeyReleased) {
                 if (event.key.code == Keyboard::Space)
                     turtle->DrawBehind();
-                if (event.key.code == Keyboard::R)
-                    turtle->Record();
+				if (event.key.code == Keyboard::R) {
+					turtle->Record();
+					std::cout << "rec";
+				}
                 if (event.key.code == Keyboard::P)
                     turtle->replay = turtle->rec;
                 if (event.key.code == Keyboard::E) {
                     Game::idxColors += 1;
                     if (Game::idxColors == 7) Game::idxColors = 0;
                 }
-                if (event.key.code == sf::Keyboard::K) {
+                if (event.key.code == sf::Keyboard::T) {
                     turtle->replay = { {CmdId::PenChange,100},{CmdId::Advance,100} };
                 }
-                if (event.key.code == Keyboard::R) {
+                if (event.key.code == Keyboard::U) {
                     turtle->replay = {
                         Cmd(CmdId::PenChange, 1),
                         Cmd(CmdId::Advance, 100),
@@ -73,6 +77,15 @@ void TestCour6(){
                         Cmd(CmdId::RotateLeft, 90),
                     };
                 }
+				if (event.key.code == Keyboard::K) {
+					CommandeFile::Save("Save1.txt", turtle->rec);
+					std::cout << "save";
+				}
+				if (event.key.code == Keyboard::L) {
+					turtle->replay.clear();
+					turtle->replay = CommandeFile::Load("Save1.txt");
+					std::cout << "load";
+				}
             }
         }
 
@@ -107,6 +120,7 @@ void TestCour6(){
             speed -= 1;
             if (speed < 1) speed = 1;
         }
+		
 
         turtle->Update(0); //mettre dt en arg plus revoir corr de update
 

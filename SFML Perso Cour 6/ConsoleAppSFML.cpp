@@ -7,6 +7,10 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <math.h>
+#include <sys/stat.h>
+
+#include <imgui.h>
+#include <imgui-SFML.h>
 
 //include own hpp
 #include "Catmull.hpp"
@@ -20,8 +24,6 @@
 
 using namespace sf;
 
-
-
 static std::vector<Color> colors = {Color(0xFF2000ff), Color(0xFF790Bff), Color(0xFFCE00ff),
     Color(0x93FF00ff), Color(0x00FFE3ff), Color(0x008CFFff), Color(0xBA0CE8ff)
 };
@@ -30,24 +32,50 @@ Turtle* turtle;
 
 int speed = 1;
 
+time_t lastModification;
+
 void TestCour6(){
+
     ContextSettings settings(0, 0, 2);
-    RenderWindow window(VideoMode(Game::gameX, Game::gameY), "Brick");
+    RenderWindow window(VideoMode(Game::gameX, Game::gameY), "Echec");
     window.setFramerateLimit(60);
     window.setVerticalSyncEnabled(true);
 
+	ImGui::SFML::Init(window);
+
     turtle = new Turtle(Vector2f(Game::gameX * 0.5, Game::gameY * 0.5));
+
+	bool doHotLoad;
+
+	static int timer = 0;
 
     double frameStart = 0;
     double frameEnd = 0.0015f;
+
+	float reloadTimer = 20.0f;
+
     while (window.isOpen())
     {
-        //faire un dt 
+		frameStart = Lib::getTimestamp();
+		double dt = frameEnd - frameStart;
+
+		doHotLoad = false;
+
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == Event::Closed)
-                window.close();
+			ImGui::SFML::ProcessEvent(window, event);
+			sf::Time deltaTime;
+			ImGui::SFML::Update(window, deltaTime);
+			//ImGui::Begin();
+			//ImGui::Button();
+			ImGui::EndFrame;
+			ImGui::End;
+
+			if (event.type == Event::Closed) {
+				window.close();
+				ImGui::SFML::Shutdown(window);
+			}
             if (event.type == Event::KeyReleased) {
                 if (event.key.code == Keyboard::Space)
                     turtle->DrawBehind();
@@ -82,12 +110,34 @@ void TestCour6(){
 					std::cout << "save";
 				}
 				if (event.key.code == Keyboard::L) {
+					doHotLoad = true;
+				}
+
+				if (event.key.code == Keyboard::V) {
 					turtle->replay.clear();
-					turtle->replay = CommandeFile::Load("Save1.txt");
+					turtle->replay = CommandeFile::LoadScript("Save2.txt");
 					std::cout << "load";
 				}
             }
         }
+
+		timer++;
+		if (timer > 60) {
+			struct stat ts = {};
+			stat("Save1.txt", &ts);
+			doHotLoad = false;
+		}
+
+		if (doHotLoad) {
+			turtle->replay.clear();
+			turtle->replay = CommandeFile::Load("Save1.txt");
+			std::cout << "load";
+
+			//struct stat ts = {};
+
+			//stat("save1.txt", &ts);
+			//lastModification = ts.st_mtime;
+		}
 
         if (Keyboard::isKeyPressed(Keyboard::Z) ||
             Keyboard::isKeyPressed(Keyboard::Up)) {

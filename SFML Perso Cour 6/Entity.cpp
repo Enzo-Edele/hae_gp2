@@ -143,6 +143,6 @@ void Turtle::Update(float dt)
 
 	}
 	else if (replay.size()) {
-		updateReplayInterpolated();
+		UpdateReplay();
 	}
 }

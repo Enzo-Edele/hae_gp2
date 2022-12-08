@@ -1,0 +1,25 @@
+﻿  ConsoleAppSFML.cpp
+D:\Git\hae_gp2\SFML Perso Cour 7\Lib.hpp(47,15): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+  The contents of <filesystem> are available only with C++17 or later.
+D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(35,11): warning C4244: '=' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(36,11): warning C4244: '=' : conversion de 'T' en 'int', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(74,56): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(74,35): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+D:\Git\hae_gp2\SFML Perso Cour 7\ConsoleAppSFML.cpp(41,23): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+  SFML Perso.vcxproj -> D:\Git\hae_gp2\SFML Perso Cour 7\x64\Debug\SFML Perso.exe

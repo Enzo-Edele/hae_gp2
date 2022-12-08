@@ -2,6 +2,7 @@
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include<iostream>
 
 #include "Game.hpp"
 
@@ -11,10 +12,10 @@ class Entity {
 public:
 	Shape* sprite;
 
-	//grid coordinat
+	//Coordinate grid
 	int cx = 0;
 	int cy = 0;
-	//grid ratio within the cell (offset)
+	//Ratio grid in cell(offset)
 	float xr = 0;
 	float yr = 0;
 
@@ -22,39 +23,35 @@ public:
 	float xx = 0;
 	float yy = 0;
 
+	//Direction manage movement
 	float dx = 0;
 	float dy = 0;
+
+	//les passer en vector
 
 	Entity(Vector2f pos, Shape* shp) {
 		cx = pos.x;
 		cy = pos.y;
 
 		sprite = shp;
-		//sprite->setOrigin(Vector2f(8, 8));
+		
 	}
 
-	void SetCoordinateWtoG(Vector2f npos) {
-		xx = npos.x;
-		yy = npos.y;
-		cx = (int)(xx / Game::cellSize);
-		cy = (int)(yy / Game::cellSize);
-		xr = (xx - cx * Game::cellSize) / Game::cellSize;
-		yr = (yy - cy * Game::cellSize) / Game::cellSize;
-	}
-
-	void SetCoordinateGtoW(Vector2f npos) {
-		xx = (npos.x + xr) * Game::cellSize;
-		yy = (npos.y + yr) * Game::cellSize;
-		SetCoordinateWtoG(Vector2f(xx, yy));
-	}
-
-	void Sync() {
+	Entity() {
 
 	}
+
+	void SetCoordinateWtoG(Vector2f npos);
+
+	void SetCoordinateGtoW(Vector2f npos);
+
+	Vector2f GetCoordinateGrid(Vector2f grid);
+
+	void Sync();
 
 	void Update();
 
-	bool HasCollision();
+	bool HasCollision(float cx, float cy);
 
 	void MoveGrid(Vector2f move);
 
@@ -63,4 +60,19 @@ public:
 	void Draw(RenderWindow& win) {
 		win.draw(*sprite);
 	}
+};
+
+class Wall : public Entity {
+public:
+	Wall(Vector2f posPx) : Entity(posPx, new RectangleShape(Vector2f(16, 16))) {
+		SetCoordinateWtoG(posPx);
+
+		sprite->setFillColor(Color::Red);
+
+		sprite->setPosition(Vector2f(cx * Game::cellSize, cy * Game::cellSize));
+
+		//td::cout << cx << " " << cy << "\n";
+	}
+
+
 };

@@ -14,4 +14,6 @@ public:
 	static const std::vector<Color> colors;
 
 	static const int cellSize;
+
+	static const float gravity;
 };

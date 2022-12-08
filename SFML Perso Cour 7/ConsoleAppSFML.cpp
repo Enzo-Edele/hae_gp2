@@ -18,13 +18,15 @@ using namespace sf;
 class Player : public Entity{
 public:
     Player(Vector2f pos) : Entity(pos, new RectangleShape(Vector2f(16, 16))) {
-        
+        sprite->setOrigin(Vector2f(8, 8));
     }
 };
 
 static std::vector<Color> colors = {Color(0xFF2000ff), Color(0xFF790Bff), Color(0xFFCE00ff),
     Color(0x93FF00ff), Color(0x00FFE3ff), Color(0x008CFFff), Color(0xBA0CE8ff)
 };
+
+World world;
 
 Player* player;
 
@@ -36,9 +38,11 @@ void TestCour7(){
 
     player = new Player(Vector2f(6, 6));
 
+    float speed = 0.05;
     while (window.isOpen())
     {
-        
+        Vector2f dir(0, 0);
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -65,24 +69,54 @@ void TestCour7(){
                     player->SetCoordinateWtoG(Vector2f(128, 128));
                 }
             }
+            /*
+            if (event.type == Event::MouseButtonReleased) {
+                if (Mouse::isButtonPressed(Mouse::Left)) {
+                    Vector2i mousePos = Mouse::getPosition();
+                    world.walls.push_back(new Wall((Vector2f)mousePos));
+                    std::cout << mousePos.x << " " << mousePos.y << "\n";
+                }
+            }*/
+        }
+
+        if (Mouse::isButtonPressed(Mouse::Left)) {
+            Vector2i mousePos = Mouse::getPosition(window);
+            Vector2f mouse = (Vector2f)mousePos;
+            world.walls.push_back(new Wall(mouse));
+            //std::cout << mouse.x << " " << mouse.y << "\n";
+           //std::cout << world.walls.size();
         }
 
         if(Keyboard::isKeyPressed(Keyboard::Up)) {
-            player->MovePixel(Vector2f(0, -0.2));
+            //player->MovePixel(Vector2f(0, -speed));
+            dir.y--;
         }
         if (Keyboard::isKeyPressed(Keyboard::Down)) {
-            player->MovePixel(Vector2f(0, 0.2));
+            //player->MovePixel(Vector2f(0, speed));
+            dir.y++;
         }
         if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            player->MovePixel(Vector2f(-0.2, 0));
+            //player->MovePixel(Vector2f(-speed, 0));
+            dir.x--;
         }
         if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            player->MovePixel(Vector2f(0.2, 0));
+            //player->MovePixel(Vector2f(speed, 0));
+            dir.x++;
+        }
+
+        float len = sqrt(dir.x * dir.x + dir.y * dir.y);
+        if (len) {
+            player->dx += dir.x * speed;
+            player->dy += dir.y * speed;
         }
 
         player->Update();
 
         window.clear();
+
+        for (auto& w : world.walls) {
+            w->Draw(window);
+        }
 
         player->Draw(window);
 

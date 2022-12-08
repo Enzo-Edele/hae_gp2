@@ -1,11 +1,17 @@
 #pragma once
 
+#include "Entity.hpp"
+
 class World {
 public:
 
+	Entity* player;
+
+	std::vector<Entity*> walls;
+
 	void Update();
 
-	void UpdateCollision();
+	bool UpdateCollision(float cx, float cy);
 
 	void UpdateDeleted();
 };

@@ -3,6 +3,21 @@
 #include "Entity.hpp"
 #include "World.hpp"
 
+Entity::Entity(Vector2f pos, Shape* shp) {
+	cx = pos.x;
+	cy = pos.y;
+
+	sprite = shp;
+
+	idleState = new Idle(this);
+	coverState = new Cover(this);
+	walkState = new Walking(this);
+	jumpState = new Jumping(this);
+	fallState = new Falling(this);
+
+	currentState = idleState;
+}
+
 //get pixel return grid
 void Entity::SetCoordinateWtoG(Vector2f npos) {
 	xx = npos.x;
@@ -29,22 +44,16 @@ void Entity::Sync()
 
 void Entity::Update()
 {
-	bool needSync = true;
+	currentState->UpdateState();
 
-	if(enableGravity)
-		dy += Game::gravity;
+	dy += Game::gravity;
 
 	xr += dx;
 	yr += dy;
-	dx *= 0.98f; //friction
-	dy *= 0.98f;
+	dx *= 0.95f; //friction
+	dy *= 0.95f;
 
 	//activer gracité que quand nécessaire
-
-	xx = (cx + xr) * Game::cellSize; //sync
-	yy = (cy + yr) * Game::cellSize; //sync
-
-
 
 	while (xr > 1) {
 		if (HasCollision(cx + 1, cy)) {
@@ -88,8 +97,12 @@ void Entity::Update()
 			cy--;
 		}
 	}
+
 	Sync();
-	//std::cout << "" << cx << " " << cy << "\n";
+}
+
+void Entity::OnEvent(Event& event) {
+	currentState->OnEvent(event);
 }
 
 bool Entity::HasCollision(float cx, float cy)
@@ -110,4 +123,9 @@ void Entity::MovePixel(Vector2f move)
 {
 	dx += move.x;
 	dy += move.y;
+}
+
+void Entity::ChangeState(State* nstate) {
+	currentState = nstate;
+	currentState->ApplyState();
 }

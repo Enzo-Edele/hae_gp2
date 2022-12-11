@@ -5,8 +5,11 @@
 #include<iostream>
 
 #include "Game.hpp"
+#include "State.hpp"
 
 using namespace sf;
+
+class State;
 
 class Entity {
 public:
@@ -26,18 +29,28 @@ public:
 	//Direction manage movement
 	float dx = 0;
 	float dy = 0;
+	//les passer en vector
 
 	bool enableGravity = true;
 
-	//les passer en vector
+	enum class StateEnum
+	{
+		Idle,
+		Walking,
+		Jumping,
+		Falling
+	};
 
-	Entity(Vector2f pos, Shape* shp) {
-		cx = pos.x;
-		cy = pos.y;
+	StateEnum state = StateEnum::Idle;
 
-		sprite = shp;
-		
-	}
+	State* currentState = nullptr;
+	State* idleState = nullptr;
+	State* coverState = nullptr;
+	State* walkState = nullptr;
+	State* jumpState = nullptr;
+	State* fallState = nullptr;
+
+	Entity(Vector2f pos, Shape* shp);
 
 	Entity() {
 
@@ -47,11 +60,11 @@ public:
 
 	void SetCoordinateGtoW(Vector2f npos);
 
-	Vector2f GetCoordinateGrid(Vector2f grid);
-
 	void Sync();
 
 	void Update();
+
+	void OnEvent(Event& event);
 
 	bool HasCollision(float cx, float cy);
 
@@ -62,6 +75,8 @@ public:
 	void Draw(RenderWindow& win) {
 		win.draw(*sprite);
 	}
+
+	void ChangeState(State* nstate);
 };
 
 class Wall : public Entity {

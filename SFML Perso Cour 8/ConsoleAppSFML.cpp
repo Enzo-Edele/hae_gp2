@@ -31,7 +31,7 @@ World world;
 
 Player* player;
 
-void TestCour7(){
+void TestCour8(){
     ContextSettings settings(0, 0, 2);
     RenderWindow window(VideoMode(Game::gameX, Game::gameY), "  Grid");
     window.setFramerateLimit(60);
@@ -39,14 +39,14 @@ void TestCour7(){
 
     player = new Player(Vector2f(6, 6));
 
-    float speed = 0.05;
     while (window.isOpen())
     {
-        Vector2f dir(0, 0);
 
         sf::Event event;
         while (window.pollEvent(event))
         {
+            player->OnEvent(event);
+
             if (event.type == Event::Closed)
                 window.close();
             if (event.type == Event::KeyReleased) {
@@ -62,7 +62,6 @@ void TestCour7(){
                 if (event.key.code == Keyboard::D) {
                     player->MoveGrid(Vector2f(1, 0));
                 }
-
                 if (event.key.code == Keyboard::E) {
                     //player->SetCoordinateGtoW(Vector2f(4, 4));
                     //LevelFile::Load(world.walls);
@@ -72,46 +71,12 @@ void TestCour7(){
                     //LevelFile::Save(world.walls);
                 }
             }
-            /*
-            if (event.type == Event::MouseButtonReleased) {
-                if (Mouse::isButtonPressed(Mouse::Left)) {
-                    Vector2i mousePos = Mouse::getPosition();
-                    world.walls.push_back(new Wall((Vector2f)mousePos));
-                    std::cout << mousePos.x << " " << mousePos.y << "\n";
-                }
-            }*/
         }
 
         if (Mouse::isButtonPressed(Mouse::Left)) {
             Vector2i mousePos = Mouse::getPosition(window);
             Vector2f mouse = (Vector2f)mousePos;
             world.walls.push_back(new Wall(mouse));
-            //std::cout << mouse.x << " " << mouse.y << "\n";
-           //std::cout << world.walls.size();
-        }
-
-        if(Keyboard::isKeyPressed(Keyboard::Up) && !player->enableGravity) { //check gravity enable
-            //player->MovePixel(Vector2f(0, -speed));
-            player->enableGravity = true;
-            dir.y -= 10;
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Down)) {
-            //player->MovePixel(Vector2f(0, speed));
-            dir.y++;
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Left)) {
-            //player->MovePixel(Vector2f(-speed, 0));
-            dir.x--;
-        }
-        if (Keyboard::isKeyPressed(Keyboard::Right)) {
-            //player->MovePixel(Vector2f(speed, 0));
-            dir.x++;
-        }
-
-        float len = sqrt(dir.x * dir.x + dir.y * dir.y);
-        if (len) {
-            player->dx += dir.x * speed;
-            player->dy += dir.y * speed;
         }
 
         player->Update();
@@ -130,7 +95,7 @@ void TestCour7(){
 
 int main()
 {
-    TestCour7();
+    TestCour8();
 
     return 0;
 }

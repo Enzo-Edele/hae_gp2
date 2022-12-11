@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Entity.hpp"
+#include "World.hpp"
 
 class LevelFile {
 public:

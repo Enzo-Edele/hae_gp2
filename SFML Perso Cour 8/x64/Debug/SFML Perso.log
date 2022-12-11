@@ -1,25 +1,31 @@
-﻿  ConsoleAppSFML.cpp
-D:\Git\hae_gp2\SFML Perso Cour 7\Lib.hpp(47,15): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
-  The contents of <filesystem> are available only with C++17 or later.
-D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(35,11): warning C4244: '=' : conversion de 'T' en 'int', perte possible de données
+﻿  State.cpp
+D:\Git\hae_gp2\SFML Perso Cour 8\Entity.hpp(89,56): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(36,11): warning C4244: '=' : conversion de 'T' en 'int', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\Entity.hpp(89,35): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
           with
           [
               T=float
           ]
-D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(74,56): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-          with
-          [
-              T=float
-          ]
-D:\Git\hae_gp2\SFML Perso Cour 7\Entity.hpp(74,35): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
-          with
-          [
-              T=float
-          ]
-D:\Git\hae_gp2\SFML Perso Cour 7\ConsoleAppSFML.cpp(41,23): warning C4305: 'initialisation' : troncation de 'double' à 'float'
-  SFML Perso.vcxproj -> D:\Git\hae_gp2\SFML Perso Cour 7\x64\Debug\SFML Perso.exe
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(19,20): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(35,46): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(35,36): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(35,95): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(35,85): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(36,43): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(36,33): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(36,92): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(36,82): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(56,20): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(70,47): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(70,37): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(70,97): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(70,87): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(71,44): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(71,34): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(71,94): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(71,84): warning C4244: 'argument' : conversion de 'int' en 'float', perte possible de données
+D:\Git\hae_gp2\SFML Perso Cour 8\State.cpp(91,20): warning C4305: 'initialisation' : troncation de 'double' à 'float'
+  SFML Perso.vcxproj -> D:\Git\hae_gp2\SFML Perso Cour 8\x64\Debug\SFML Perso.exe

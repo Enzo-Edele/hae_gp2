@@ -56,8 +56,9 @@ void TestCour6(){
 
     while (window.isOpen())
     {
-		frameStart = Lib::getTimestamp();
+		
 		double dt = frameEnd - frameStart;
+        frameStart = Lib::getTimestamp();
 
 		doHotLoad = false;
 
@@ -66,15 +67,15 @@ void TestCour6(){
         {
 			ImGui::SFML::ProcessEvent(window, event);
 			sf::Time deltaTime;
-			ImGui::SFML::Update(window, deltaTime);
+            
 			//ImGui::Begin();
 			//ImGui::Button();
-			ImGui::EndFrame;
-			ImGui::End;
+			//ImGui::EndFrame;
+			//ImGui::End;
 
 			if (event.type == Event::Closed) {
 				window.close();
-				ImGui::SFML::Shutdown(window);
+				
 			}
             if (event.type == Event::KeyReleased) {
                 if (event.key.code == Keyboard::Space)
@@ -171,15 +172,26 @@ void TestCour6(){
             if (speed < 1) speed = 1;
         }
 		
+        
 
-        turtle->Update(0); //mettre dt en arg plus revoir corr de update
+        turtle->Update(dt); //mettre dt en arg plus revoir corr de update
+
+        bool t = true;
+        ImGui::SFML::Update(window, sf::Time(sf::seconds(dt))); {
+            ImGui::ShowDemoWindow(&t);
+        }
 
         window.clear();
 
         turtle->Draw(window);
 
+        ImGui::EndFrame();
+        ImGui::SFML::Render(window);
+
         window.display();
+        frameEnd = Lib::getTimestamp();
     }
+    ImGui::SFML::Shutdown(window);
 }
 
 int main()

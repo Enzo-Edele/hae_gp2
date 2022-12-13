@@ -130,6 +130,6 @@ void Falling::OnEvent(sf::Event& event)
 void Falling::UpdateState()
 {
 	if (owner->dy == 0) {
-		owner->ChangeState(owner->fallState);
+		owner->ChangeState(owner->idleState);
 	}
 }

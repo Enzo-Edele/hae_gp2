@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <math.h>
+#include "Libs/imgui/imgui.h"
 
 //include own hpp
 #include "Game.hpp"

@@ -1,0 +1,99 @@
+﻿  ConsoleAppSFML.cpp
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Lib.hpp(47,15): warning C4244: 'initialisation' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(91,56): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(91,35): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(108,77): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(108,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(73,48): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(79,12): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(80,12): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(128,87): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(128,58): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(172,1): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\ConsoleAppSFML.cpp(113,117): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\ConsoleAppSFML.cpp(113,82): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+  Dijkstra.cpp
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(91,56): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(91,35): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(108,77): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Entity.hpp(108,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(73,48): warning C4244: '=' : conversion de 'float' en 'int', perte possible de données
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(79,12): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(80,12): warning C4244: 'initialisation' : conversion de 'T' en 'float', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(128,87): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(128,58): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\SFML Perso Cour 8 bis\Dijkstra.hpp(172,1): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  Génération de code en cours...
+  SFML Perso.vcxproj -> C:\Git\hae_gp2\SFML Perso Cour 8 bis\x64\Debug\SFML Perso.exe

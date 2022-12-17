@@ -7,7 +7,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <math.h>
-#include "Libs/imgui/imgui.h"
 
 //include own hpp
 #include "Game.hpp"
@@ -42,7 +41,6 @@ void TestCour8(){
 
     while (window.isOpen())
     {
-
         sf::Event event;
         while (window.pollEvent(event))
         {

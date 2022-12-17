@@ -1,0 +1,8 @@
+﻿  ConsoleAppSFML.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(84,58): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+  Entity.cpp
+  Game.cpp
+  World.cpp
+  Génération de code en cours...
+  SFML Perso.vcxproj -> C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\x64\Debug\SFML Perso.exe

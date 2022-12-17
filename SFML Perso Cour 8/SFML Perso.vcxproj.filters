@@ -33,24 +33,6 @@
     <ClCompile Include="State.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Libs\imgui-sfml\imgui-SFML.cpp">
-      <Filter>IMGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Libs\imgui\imgui_tables.cpp">
-      <Filter>IMGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Libs\imgui\imgui_widgets.cpp">
-      <Filter>IMGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Libs\imgui\imgui_draw.cpp">
-      <Filter>IMGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Libs\imgui\imgui.cpp">
-      <Filter>IMGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="Libs\imgui\imgui_demo.cpp">
-      <Filter>IMGUI</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lib.hpp">
@@ -70,12 +52,6 @@
     </ClInclude>
     <ClInclude Include="State.hpp">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\imgui-sfml\imgui-SFML_export.h">
-      <Filter>IMGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="Libs\imgui\imconfig.h">
-      <Filter>IMGUI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

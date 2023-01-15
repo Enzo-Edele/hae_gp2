@@ -113,8 +113,12 @@ void Project(){
 			if (event.type == Event::Closed) {
 				window.close();
 			}
+            //is key press
+            if (event.type == Event::KeyReleased && Game::state != GameState::Game) {
+                Game::StartGame();
+            }
             //is key released
-            if (event.type == Event::KeyReleased) {
+            if (event.type == Event::KeyReleased && Game::state == GameState::Game) {
                 if (event.key.code == Keyboard::Space) {
                     player->Shoot();
                 }
@@ -132,19 +136,19 @@ void Project(){
         float speed = 0.1f;
         //is key pressed
         if (Keyboard::isKeyPressed(Keyboard::Z) ||
-            Keyboard::isKeyPressed(Keyboard::Up)) {
+            Keyboard::isKeyPressed(Keyboard::Up) && Game::state == GameState::Game) {
             player->direction.y -= speed;
         }
         if (Keyboard::isKeyPressed(Keyboard::S) ||
-            Keyboard::isKeyPressed(Keyboard::Down)) {
+            Keyboard::isKeyPressed(Keyboard::Down) && Game::state == GameState::Game) {
             player->direction.y += speed;
         }
         if (Keyboard::isKeyPressed(Keyboard::D) ||
-            Keyboard::isKeyPressed(Keyboard::Right)) {
+            Keyboard::isKeyPressed(Keyboard::Right) && Game::state == GameState::Game) {
             player->direction.x += speed;
         }
         if (Keyboard::isKeyPressed(Keyboard::Q) ||
-            Keyboard::isKeyPressed(Keyboard::Left)) {
+            Keyboard::isKeyPressed(Keyboard::Left) && Game::state == GameState::Game) {
             player->direction.x -= speed;
         }
         //Mouse Buttton

@@ -37,6 +37,10 @@ public:
 
 	static void changeLives(int scoring);
 
+	static void StartGame();
+
+	static void EndGame();
+
 	static void playSound(const char* sound);
 
 	static void playPlayerShot();

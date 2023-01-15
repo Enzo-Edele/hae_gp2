@@ -62,6 +62,14 @@ void Game::changeLives(int change)
 	Game::livesText.setString(txt);
 	//if 0 game over
 }
+void Game::StartGame()
+{
+	state = GameState::Game;
+}
+void Game::EndGame()
+{
+	state = GameState::GameOver;
+}
 /*
 void Game::playSound(const char* sound)
 {

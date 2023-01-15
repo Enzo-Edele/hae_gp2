@@ -155,6 +155,9 @@
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.hpp" />
+    <ClInclude Include="Comand.hpp" />
+    <ClInclude Include="ComandFile.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Lib.hpp" />

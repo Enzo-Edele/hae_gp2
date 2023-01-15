@@ -1,2 +1,70 @@
-﻿  Game.cpp
+﻿  ConsoleAppSFML.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Background.hpp(18,11): warning C4244: '=' : conversion de 'int' en 'float', perte possible de données
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Background.hpp(24,62): warning C4244: 'argument' : conversion de 'float' en 'T', perte possible de données
+          with
+          [
+              T=int
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(64,47): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(81,48): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(81,32): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(82,67): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(82,51): warning C4244: 'argument' : conversion de 'const int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(170,32): warning C4244: '-=' : conversion de 'double' en 'float', perte possible de données
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\ConsoleAppSFML.cpp(193,58): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+  Entity.cpp
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Entity.cpp(107,68): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Entity.cpp(107,40): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Entity.cpp(186,68): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Entity.cpp(186,40): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Entity.cpp(266,60): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\Entity.cpp(266,36): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+  Game.cpp
+  World.cpp
+  Génération de code en cours...
   SFML Perso.vcxproj -> C:\Git\hae_gp2\HAE_GP2_Projet_FinSemestre\x64\Debug\SFML Perso.exe

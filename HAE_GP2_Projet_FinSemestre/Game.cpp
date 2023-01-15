@@ -16,7 +16,7 @@ const int Game::cellSize = 16;
 const int Game::gameCellX = Game::gameX / Game::cellSize;
 const int Game::gameCellY = Game::gameY / Game::cellSize;
 
-const std::vector<Color> Game::colors = { 
+const std::vector<Color> Game::colors = {
 	Color(0x00144Fff),
 	Color(0x002185ff),
 	Color(0x630003ff)
@@ -30,6 +30,12 @@ const std::vector<Vector2i> Game::spawnPos = {
 	Vector2i(80, 10),
 	Vector2i(80, 30)
 };
+
+GameState Game::state = GameState::Menu;
+
+void Game::changeState(GameState newState) {
+	state = newState;
+}
 
 //sound here
 
@@ -56,7 +62,7 @@ void Game::changeLives(int change)
 	Game::livesText.setString(txt);
 	//if 0 game over
 }
-
+/*
 void Game::playSound(const char* sound)
 {
 	sf::SoundBuffer* sb = soundBuffers[sound];
@@ -70,6 +76,7 @@ void Game::playSound(const char* sound)
 	s->play();
 	sounds.push_back(s);
 }
+
 void Game::playPlayerShot() {
 	playSound("Asset/Sound/PlayerShot.ogg");
 }
@@ -83,7 +90,7 @@ void Game::playPlayerDestruction() {
 void Game::playEnemyDestruction() {
 	playSound("Asset/Sound/EnemyDestruction.ogg");
 }
-
+*/
 //image + texture here
 
  

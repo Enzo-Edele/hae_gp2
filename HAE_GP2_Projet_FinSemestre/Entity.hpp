@@ -90,6 +90,7 @@ public:
 class Eneny : public Entity {
 public:
 	Vector2i startPos;
+	Texture projectile;
 	//liste de commande
 
 	Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture);
@@ -109,7 +110,7 @@ public:
 
 class Projectile : public Entity {
 public:
-	Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture);
+	Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir);
 
 	//hasCollision ???
 	bool HasCollision(Vector2i pos);

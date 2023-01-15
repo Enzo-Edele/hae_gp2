@@ -171,7 +171,8 @@ void Player::Shoot() {
 		Vector2f(8, 2),
 		gridOffset,
 		new RectangleShape(Vector2f(8, 2)),
-		projectile));
+		projectile,
+		Vector2f(1.0f, 0.0f)));
 }
 
 void Player::Killed()
@@ -184,9 +185,14 @@ Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture) : Enti
 	texture = newTexture;
 	sprite.setTexture(texture);
 	sprite.setPosition(Vector2f(posGrid.x * Game::cellSize, posGrid.y * Game::cellSize));
+	offsetShoot = Vector2i(0, 1);
 
 	int rndPos = Lib::rand() % 3 + 1;
 	posGrid = Game::spawnPos[rndPos];
+
+	if (!projectile.loadFromFile("Asset/Sprite/enemyProj.png")) {
+		printf("error can't load playerProj sprite");
+	}
 }
 
 void Eneny::Update() {
@@ -243,6 +249,11 @@ void Eneny::Update() {
 	posWorld = ((Vector2f)posGrid + gridOffset) * (float)Game::cellSize;
 	shape->setPosition(posWorld);
 	sprite.setPosition(posWorld);
+
+	//to be deleted
+	if (Lib::rand() % 50 == 25) {
+		Shoot();
+	}
 }
 
 bool Eneny::HasCollision(Vector2i pos) {
@@ -254,13 +265,19 @@ bool Eneny::HasCollision(Vector2i pos) {
 }
 
 void Eneny::Shoot() {
-
+	world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
+		Vector2f(8, 2),
+		gridOffset,
+		new RectangleShape(Vector2f(8, 2)),
+		projectile,
+		Vector2f(-1.0f, 0.0f)));
 }
 
-Projectile::Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture) : Entity(pos, size, shp) {
+Projectile::Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir) : Entity(pos, size, shp) {
 	texture = newTexture;
 
 	gridOffset = offset;
+	direction = dir;
 
 	sprite.setTexture(texture);
 	sprite.setPosition(Vector2f(pos.x * Game::cellSize, pos.y * Game::cellSize));
@@ -277,9 +294,8 @@ bool Projectile::HasCollision(Vector2i pos) {
 }
 
 void Projectile::Update() {
-	direction = Vector2f(1.0f, 0.0f);
 	gridOffset += direction;
-	direction *= 0.92f;
+	//direction *= 0.92f;
 
 	while (gridOffset.x > 1) {
 		if (HasCollision(Vector2i(posGrid.x + 1, posGrid.y))) {

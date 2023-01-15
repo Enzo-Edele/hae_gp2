@@ -65,6 +65,8 @@ void Game::changeLives(int change)
 void Game::StartGame()
 {
 	state = GameState::Game;
+	Game::changeScore(0);
+	Game::changeLives(0);
 }
 void Game::EndGame()
 {

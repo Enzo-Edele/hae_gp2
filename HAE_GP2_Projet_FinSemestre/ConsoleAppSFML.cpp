@@ -60,11 +60,9 @@ void Project(){
     }
 
     Game::scoreText.setFont(gameFont);
-    Game::changeScore(0);
     Game::scoreText.setPosition(Vector2f(-180 + Game::gameCellX * Game::cellSize, 0));
 
     Game::livesText.setFont(gameFont);
-    Game::changeLives(0);
 
     background = new Background(&backgroundTexture);
 
@@ -168,9 +166,9 @@ void Project(){
                 Game::playerSize,
                 new RectangleShape(Game::playerSize),
                 enemyFighter));
-            enemySpawnTimer = 7.0f;
+            enemySpawnTimer = Lib::rand() % 4 + 3;
         }
-        else {
+        else if(Game::state == GameState::Game) {
             enemySpawnTimer -= dt;
         }
 

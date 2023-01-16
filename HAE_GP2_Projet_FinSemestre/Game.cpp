@@ -45,7 +45,7 @@ static std::unordered_map<std::string, SoundBuffer*> soundBuffers;
 int Game::score = 0;
 Text Game::scoreText;
 
-int Game::lives = 3;
+int Game::lives = -1;
 Text Game::livesText;
 
 void Game::changeScore(int scoring)
@@ -62,15 +62,20 @@ void Game::changeLives(int change)
 	Game::livesText.setString(txt);
 	//if 0 game over
 }
+
+Text Game::menuText;
+
 void Game::StartGame()
 {
 	state = GameState::Game;
-	Game::changeScore(0);
-	Game::changeLives(0);
+	Game::changeScore(-Game::score);
+	Game::changeLives(4);
+	Game::menuText.setString(std::string(""));
 }
 void Game::EndGame()
 {
 	state = GameState::GameOver;
+	Game::menuText.setString(std::string("Game Over Press 'R' to restart"));
 }
 /*
 void Game::playSound(const char* sound)

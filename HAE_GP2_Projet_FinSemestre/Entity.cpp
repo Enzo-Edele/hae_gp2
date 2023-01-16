@@ -107,12 +107,14 @@ Player::Player(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture) : En
 	sprite.setPosition(Vector2f(posGrid.x * Game::cellSize, posGrid.y * Game::cellSize));
 	offsetShoot = Vector2i(4, 1);
 
+	invincibleTimer = 0.0f;
+
 	if (!projectile.loadFromFile("Asset/Sprite/playerProj.png")) {
 		printf("error can't load playerProj sprite");
 	}
 }
 
-void Player::Update() {
+void Player::Update(float dt) {
 	gridOffset += direction;
 	direction *= 0.92f;
 
@@ -164,21 +166,37 @@ void Player::Update() {
 	posWorld = ((Vector2f)posGrid + gridOffset) * (float)Game::cellSize;
 	shape->setPosition(posWorld);
 	sprite.setPosition(posWorld);
+
+	if (invincibleTimer > 0) {
+		invincibleTimer -= dt;
+	}
+	else if (invincibleTimer != 0) {
+		invincibleTimer = 0;
+	}
 }
 
 void Player::Shoot() {
 	world.playerProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
-		Vector2f(8, 2),
+		Vector2f(12, 4),
 		gridOffset,
-		new RectangleShape(Vector2f(8, 2)),
+		new RectangleShape(Vector2f(12, 4)),
 		projectile,
 		Vector2f(1.0f, 0.0f)));
 }
 
 void Player::Killed()
 {
-	SetCoordinateGtoW(Game::spawnPos[0]);
-	Game::changeLives(-1);
+	if (invincibleTimer == 0) {
+		SetCoordinateGtoW(Game::spawnPos[0]);
+		Game::changeLives(-1);
+		invincibleTimer = 3.0f;
+
+		if (Game::lives < 0) {
+			Game::EndGame();
+			//world.Clear();
+			SetCoordinateGtoW(Game::spawnPos[0]);
+		}
+	}
 }
 
 Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture) : Entity(pos, size, shp) {
@@ -190,15 +208,19 @@ Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture) : Enti
 	int rndPos = Lib::rand() % 3 + 1;
 	posGrid = Game::spawnPos[rndPos];
 
+	shootDirections.push_back(Vector2f(-1.0f, 0.0f));
+	shootDirections.push_back(Vector2f(-0.7f, 0.3f));
+	shootDirections.push_back(Vector2f(-0.7f, -0.3f));
+
 	if (!projectile.loadFromFile("Asset/Sprite/enemyProj.png")) {
 		printf("error can't load playerProj sprite");
 	}
 }
 
 void Eneny::Update() {
-	direction = Vector2f(-0.4f, 0.0f);
+	direction = Vector2f(-0.2f, 0.0f);
 	gridOffset += direction;
-	direction *= 0.92f;
+	//direction *= 0.92f;
 
 	while (gridOffset.x > 1) {
 		if (HasCollision(Vector2i(posGrid.x + 1, posGrid.y))) {
@@ -254,6 +276,9 @@ void Eneny::Update() {
 	if (Lib::rand() % 50 == 25) {
 		Shoot();
 	}
+	if (Lib::rand() % 50 == 30) {
+		ShootSpe();
+	}
 }
 
 bool Eneny::HasCollision(Vector2i pos) {
@@ -266,11 +291,23 @@ bool Eneny::HasCollision(Vector2i pos) {
 
 void Eneny::Shoot() {
 	world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
-		Vector2f(8, 2),
+		Vector2f(12, 4),
 		gridOffset,
-		new RectangleShape(Vector2f(8, 2)),
+		new RectangleShape(Vector2f(12, 4)),
 		projectile,
 		Vector2f(-1.0f, 0.0f)));
+}
+
+void Eneny::ShootSpe()
+{
+	for (int i = 0; i < shootDirections.size(); i++) {
+		world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
+			Vector2f(12, 4),
+			gridOffset,
+			new RectangleShape(Vector2f(12, 4)),
+			projectile,
+			shootDirections[i]));
+	}
 }
 
 Projectile::Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir) : Entity(pos, size, shp) {
@@ -291,6 +328,12 @@ bool Projectile::HasCollision(Vector2i pos) {
 	}
 
 	return false;
+}
+
+void Projectile::Forward(int px)
+{
+	trs = trs.translate(Vector2f(0, -px));
+	sprite.setPosition(trs.transformPoint(0, 0));
 }
 
 void Projectile::Update() {

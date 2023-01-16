@@ -27,6 +27,7 @@ bool World::UpdateCollisionPlayerDestroy(Vector2i pos) {
 		if (e->posGrid.x >= pos.x && e->posGrid.x <= pos.x + 4 &&
 			e->posGrid.y >= pos.y && e->posGrid.y <= pos.y + 2
 			) {
+			enemiesToBeDeleted.push_back(e);
 			return true;
 		}
 	}
@@ -34,6 +35,7 @@ bool World::UpdateCollisionPlayerDestroy(Vector2i pos) {
 		if (pe->posGrid.x >= pos.x && pe->posGrid.x <= pos.x + 7.5 &&
 			pe->posGrid.y >= pos.y && pe->posGrid.y <= pos.y + 3.8
 			) {
+			enemyProjToBeDeleted.push_back(pe);
 			return true;
 		}
 	}
@@ -93,8 +95,30 @@ void World::UpdateDeleted() {
 		}
 	}
 
+	for (auto& d : enemyProjToBeDeleted) {
+		auto& pp = world.enemyProj;
+		auto pos = std::find(pp.begin(), pp.end(), d);
+		if (pos != pp.end()) {
+			world.enemyProj.erase(pos);
+		}
+	}
+
 	//delete to be deleted list
 
 	world.enemiesToBeDeleted.clear();
 	world.playerProjToBeDeleted.clear();
+	world.enemyProjToBeDeleted.clear();
+}
+
+void World::Clear()
+{
+	for (auto& e : enemies) {
+		enemiesToBeDeleted.push_back(e);
+	}
+	for (auto& pe : enemyProj) {
+		enemyProjToBeDeleted.push_back(pe);
+	}
+	for (auto& pp : playerProj) {
+		playerProj.push_back(pp);
+	}
 }

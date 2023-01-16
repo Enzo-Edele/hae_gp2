@@ -64,6 +64,10 @@ void Project(){
 
     Game::livesText.setFont(gameFont);
 
+    Game::menuText.setFont(gameFont);
+    Game::menuText.setString("Press any key to start");
+    Game::menuText.setPosition(Vector2f(640, 360));
+
     background = new Background(&backgroundTexture);
 
     player = new Player(
@@ -111,8 +115,11 @@ void Project(){
 			if (event.type == Event::Closed) {
 				window.close();
 			}
-            //is key press
-            if (event.type == Event::KeyReleased && Game::state != GameState::Game) {
+            //is key release
+            if (event.type == Event::KeyReleased && Game::state == GameState::Menu) {
+                Game::StartGame();
+            }
+            if (Keyboard::isKeyPressed(Keyboard::R) && Game::state == GameState::GameOver) {
                 Game::StartGame();
             }
             //is key released
@@ -131,22 +138,22 @@ void Project(){
 
 		//HotLoad
 
-        float speed = 0.1f;
+        float speed = 0.05f;
         //is key pressed
-        if (Keyboard::isKeyPressed(Keyboard::Z) ||
-            Keyboard::isKeyPressed(Keyboard::Up) && Game::state == GameState::Game) {
+        if ((Keyboard::isKeyPressed(Keyboard::Z) ||
+            Keyboard::isKeyPressed(Keyboard::Up)) && Game::state == GameState::Game) {
             player->direction.y -= speed;
         }
-        if (Keyboard::isKeyPressed(Keyboard::S) ||
-            Keyboard::isKeyPressed(Keyboard::Down) && Game::state == GameState::Game) {
+        if ((Keyboard::isKeyPressed(Keyboard::S) ||
+            Keyboard::isKeyPressed(Keyboard::Down)) && Game::state == GameState::Game) {
             player->direction.y += speed;
         }
-        if (Keyboard::isKeyPressed(Keyboard::D) ||
-            Keyboard::isKeyPressed(Keyboard::Right) && Game::state == GameState::Game) {
+        if ((Keyboard::isKeyPressed(Keyboard::D) ||
+            Keyboard::isKeyPressed(Keyboard::Right)) && Game::state == GameState::Game) {
             player->direction.x += speed;
         }
-        if (Keyboard::isKeyPressed(Keyboard::Q) ||
-            Keyboard::isKeyPressed(Keyboard::Left) && Game::state == GameState::Game) {
+        if ((Keyboard::isKeyPressed(Keyboard::Q) ||
+            Keyboard::isKeyPressed(Keyboard::Left)) && Game::state == GameState::Game) {
             player->direction.x -= speed;
         }
         //Mouse Buttton
@@ -155,6 +162,7 @@ void Project(){
             //Vector2i mousePosGrid = Vector2i(mousePos.x / Game::cellSize, mousePos.y / Game::cellSize);
             //Vector2f size(Game::cellSize, Game::cellSize);
             //world.blockers.push_back(new Blocker(mousePosGrid, size, new RectangleShape(size)));
+            player->Shoot();
         }
         if (Mouse::isButtonPressed(Mouse::Right)) {
             
@@ -175,7 +183,7 @@ void Project(){
         //Update
         background->Update();
 
-        player->Update();
+        player->Update(dt);
 
         for (auto& e : world.enemies) {
             e->Update();
@@ -188,6 +196,8 @@ void Project(){
         for (auto& p : world.enemyProj) {
             p->Update();
         }
+
+        player->Update(dt);
 
         world.UpdateDeleted();
 
@@ -225,6 +235,7 @@ void Project(){
 
         window.draw(Game::scoreText);
         window.draw(Game::livesText);
+        window.draw(Game::menuText);
 
         ImGui::EndFrame();
         ImGui::SFML::Render(window);

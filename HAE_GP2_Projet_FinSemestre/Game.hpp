@@ -37,6 +37,8 @@ public:
 
 	static void changeLives(int scoring);
 
+	static Text menuText;
+
 	static void StartGame();
 
 	static void EndGame();

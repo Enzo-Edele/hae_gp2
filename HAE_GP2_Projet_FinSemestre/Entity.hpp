@@ -71,11 +71,13 @@ class Player : public Entity{
 public:
 	Texture projectile;
 
+	float invincibleTimer;
+
 	Player(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture);
 
 	//hasCollision
 
-	void Update();
+	void Update(float dt);
 
 	void Draw(RenderWindow& win) {
 		//win.draw(*shape);
@@ -92,6 +94,7 @@ public:
 	Vector2i startPos;
 	Texture projectile;
 	//liste de commande
+	std::vector<Vector2f> shootDirections;
 
 	Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture);
 
@@ -106,11 +109,15 @@ public:
 	};
 
 	void Shoot();
+
+	void ShootSpe();
 };
 
 class Projectile : public Entity {
 public:
 	Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir);
+
+	Transform trs;
 
 	//hasCollision ???
 	bool HasCollision(Vector2i pos);
@@ -119,6 +126,8 @@ public:
 		win.draw(*shape);
 		win.draw(sprite);
 	};
+
+	void Forward(int px);
 
 	void Update();
 };

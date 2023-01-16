@@ -31,6 +31,8 @@ public:
 	bool UpdateCollisionProjectile(Vector2i pos);
 
 	void UpdateDeleted();
+
+	void Clear();
 };
 
 extern World world;

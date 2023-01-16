@@ -7,10 +7,6 @@ Entity::Entity(Vector2i pos, Vector2f shapeSize, Shape* shp) {
 	shape = shp;
 	posGrid = pos;
 	size = shapeSize;
-
-	if (!destructTexture.loadFromFile("Asset/Sprite/boom.png")) {
-		printf("error can't load boom sprite");
-	}
 }
 
 void Entity::SetCoordinateWtoG(Vector2f npos) {
@@ -91,14 +87,26 @@ void Entity::Move(Vector2f movDirection) {
 
 }
 
-Cell::Cell(Vector2i pos, Vector2f size, Shape* shp, Color color, Texture nTexture) : Entity(pos, size, shp) {
+Cell::Cell(Vector2i pos, Vector2f size, Shape* shp, Color color) : Entity(pos, size, shp) {
 	shape->setFillColor(color);
 	shape->setOutlineColor(Color::Black);
 
-	texture = nTexture;
-	sprite.setTexture(texture);
+	if (!boom0.loadFromFile("Asset/Sprite/boom0.png")) {
+		printf("error can't load boom0 sprite");
+	}
+	if (!boom1.loadFromFile("Asset/Sprite/boom1.png")) {
+		printf("error can't load boom1 sprite");
+	}
+	if (!boom2.loadFromFile("Asset/Sprite/boom2.png")) {
+		printf("error can't load boom2 sprite");
+	}
+	if (!boom3.loadFromFile("Asset/Sprite/boom3.png")) {
+		printf("error can't load boom3 sprite");
+	}
 
-	lifespawn = 0.4f;
+	sprite.setTexture(boom0);
+
+	lifespawn = 0.6f;
 
 	Update();
 }
@@ -110,9 +118,13 @@ void Cell::Lifespawn(float dt) {
 	}
 	else {
 		world.cellsToBeDeleted.push_back(this);
-		
 	}
-	
+	if (lifespawn < 0.15f)
+		sprite.setTexture(boom3);
+	else if (lifespawn < 0.30f)
+		sprite.setTexture(boom2);
+	else if (lifespawn < 0.45f)
+		sprite.setTexture(boom1);
 }
 
 Blocker::Blocker(Vector2i pos, Vector2f size, Shape* shp) : Entity(pos, size, shp) {
@@ -221,7 +233,7 @@ void Player::Killed()
 		world.cells.push_back(new Cell(Vector2i(posGrid.x + 2, posGrid.y + 1),
 			Vector2f(Game::cellSize, Game::cellSize),
 			new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
-			Color::Blue, destructTexture));
+			Color::Blue));
 
 		SetCoordinateGtoW(Game::spawnPos[0]);
 		Game::changeLives(-1);
@@ -244,11 +256,16 @@ Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture, EnemyT
 
 	type = nType;
 
-	int rndPos = Lib::rand() % 6 + 1;
-	if (rndPos < 4)
-		posGrid = Game::spawnPos[rndPos];
-	else
-		posGrid = Vector2i(80, Lib::rand() % 25 + 10);
+	if (type == EnemyType::corvette) {
+		posGrid = Vector2i(80, Lib::rand() % 35 + 6);
+	}
+	else if (type == EnemyType::cruiser) {
+		int rndPos = Lib::rand() % 5 + 1;
+		if (rndPos < 4)
+			posGrid = Game::spawnPos[rndPos];
+		else
+			posGrid = Vector2i(80, Lib::rand() % 25 + 11);
+	}
 
 	shootDirections.push_back(Vector2f(-1.0f, 0.0f));
 	shootDirections.push_back(Vector2f(-0.7f, 0.3f));
@@ -310,13 +327,13 @@ void Eneny::Update(float dt) {
 			world.cells.push_back(new Cell(Vector2i(posGrid.x + 2, posGrid.y + 1),
 				Vector2f(Game::cellSize, Game::cellSize),
 				new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
-				Color::Blue, destructTexture));
+				Color::Blue));
 		}
 		else if (type == EnemyType::corvette) {
 			world.cells.push_back(new Cell(Vector2i(posGrid.x + 1, posGrid.y + 1),
 				Vector2f(Game::cellSize, Game::cellSize),
 				new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
-				Color::Blue, destructTexture));
+				Color::Blue));
 		}
 		Game::changeScore(50);
 	}
@@ -330,11 +347,14 @@ void Eneny::Update(float dt) {
 		shotTimer -= dt;
 	}
 	else {
-		shotTimer = Lib::rand() % 2 + 4;
-		if (Lib::rand() % 5 == 4)
-			ShootSpe();
-		else
+		if (type == EnemyType::corvette) {
+			shotTimer = Lib::rand() % 1 + 3;
 			Shoot();
+		}
+		if (type == EnemyType::cruiser) {
+			shotTimer = Lib::rand() % 2 + 5;
+			ShootSpe();
+		}
 	}
 }
 

@@ -5,6 +5,7 @@ using namespace sf;
 enum class GameState : int {
 	Menu,
 	Game,
+	Pause,
 	GameOver,
 };
 
@@ -40,6 +41,9 @@ public:
 	static Text menuText;
 
 	static void StartGame();
+
+	static void PauseGame();
+	static void ResumeGame();
 
 	static void EndGame();
 

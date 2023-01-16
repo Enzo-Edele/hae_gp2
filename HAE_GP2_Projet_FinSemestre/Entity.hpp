@@ -21,7 +21,6 @@ public:
 	Shape* shape = nullptr;
 	Texture texture;
 	Sprite sprite;
-	Texture destructTexture;
 
 	Vector2i posGrid = Vector2i(0, 0);
 	Vector2f gridOffset = Vector2f(0, 0);
@@ -61,7 +60,12 @@ public:
 class Cell : public Entity {
 public:
 	float lifespawn = 0.0f;
-	Cell(Vector2i pos, Vector2f size, Shape* shp, Color color, Texture nTexture);
+	Texture boom0;
+	Texture boom1;
+	Texture boom2;
+	Texture boom3;
+
+	Cell(Vector2i pos, Vector2f size, Shape* shp, Color color);
 
 	void Lifespawn(float dt);
 

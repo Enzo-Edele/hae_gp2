@@ -65,11 +65,6 @@ void Project(){
         printf("error can't load enemy sprite");
     }
 
-    Texture boom;
-    if (!boom.loadFromFile("Asset/Sprite/boom.png")) {
-        printf("error can't load enemy sprite");
-    }
-
     Game::scoreText.setFont(gameFont);
     Game::scoreText.setPosition(Vector2f(-180 + Game::gameCellX * Game::cellSize, 0));
 
@@ -108,7 +103,8 @@ void Project(){
     double frameStart = 0;
     double frameEnd = 0.0015f;
 
-    float enemySpawnTimer = 5.0f;
+    float enemyCorvetteSpawnTimer = 2.5f;
+    float enemyCruiserSpawnTimer = 5.0f;
 
     while (window.isOpen())
     {
@@ -179,28 +175,29 @@ void Project(){
             
         }
 
-        if (enemySpawnTimer < 0) {
-            int enemyType = Lib::rand() % 2;
-            if (enemyType == 0) {
-                world.enemies.push_back(new Eneny(
-                    Vector2i(60, 22),
-                    Game::playerSize,
-                    new RectangleShape(Game::playerSize),
-                    enemyFighter,
-                    EnemyType::cruiser));
-            }
-            else if (enemyType == 1) {
-                world.enemies.push_back(new Eneny(
-                    Vector2i(60, 22),
-                    Vector2f(Game::cellSize * 2, Game::cellSize * 2),
-                    new RectangleShape(Vector2f(Game::cellSize * 2, Game::cellSize * 2)),
-                    enemyFighterSmall,
-                    EnemyType::corvette));
-            }
-            enemySpawnTimer = Lib::rand() % 2 + 4;
+        if (enemyCorvetteSpawnTimer < 0) {
+            world.enemies.push_back(new Eneny(
+                Vector2i(60, 22),
+                Vector2f(Game::cellSize * 2, Game::cellSize * 2),
+                new RectangleShape(Vector2f(Game::cellSize * 2, Game::cellSize * 2)),
+                enemyFighterSmall,
+                EnemyType::corvette));
+            enemyCorvetteSpawnTimer = Lib::rand() % 1 + 3;
         }
         else if(Game::state == GameState::Game) {
-            enemySpawnTimer -= dt;
+            enemyCorvetteSpawnTimer -= dt;
+        }
+        if (enemyCruiserSpawnTimer < 0) {
+            world.enemies.push_back(new Eneny(
+                Vector2i(60, 22),
+                Vector2f(Game::cellSize * 4, Game::cellSize * 2),
+                new RectangleShape(Vector2f(Game::cellSize * 4, Game::cellSize * 2)),
+                enemyFighter,
+                EnemyType::cruiser));
+            enemyCruiserSpawnTimer = Lib::rand() % 2 + 4;
+        }
+        else if (Game::state == GameState::Game) {
+            enemyCruiserSpawnTimer -= dt;
         }
 
         //Update

@@ -72,8 +72,13 @@ void Game::StartGame()
 	Game::changeLives(4);
 	Game::menuText.setString(std::string(""));
 }
-void Game::EndGame()
-{
+void Game::PauseGame() {
+	state = GameState::Pause;
+}
+void Game::ResumeGame() {
+	state = GameState::Game;
+}
+void Game::EndGame() {
 	state = GameState::GameOver;
 	Game::menuText.setString(std::string("Game Over Press 'R' to restart"));
 }
@@ -106,5 +111,6 @@ void Game::playEnemyDestruction() {
 	playSound("Asset/Sound/EnemyDestruction.ogg");
 }
 */
+
 
  

@@ -16,6 +16,7 @@ public:
 	std::vector<Projectile*> playerProj;
 	std::vector<Projectile*> enemyProj;
 
+	std::vector<Cell*> cellsToBeDeleted;
 	std::vector<Eneny*> enemiesToBeDeleted;
 	std::vector<Projectile*> playerProjToBeDeleted;
 	std::vector<Projectile*> enemyProjToBeDeleted;

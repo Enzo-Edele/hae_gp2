@@ -102,12 +102,20 @@ void World::UpdateDeleted() {
 			world.enemyProj.erase(pos);
 		}
 	}
+	for (auto& d : cellsToBeDeleted) {
+		auto& pp = world.cells;
+		auto pos = std::find(pp.begin(), pp.end(), d);
+		if (pos != pp.end()) {
+			world.cells.erase(pos);
+		}
+	}
 
 	//delete to be deleted list
 
 	world.enemiesToBeDeleted.clear();
 	world.playerProjToBeDeleted.clear();
 	world.enemyProjToBeDeleted.clear();
+	world.cellsToBeDeleted.clear();
 }
 
 void World::Clear()

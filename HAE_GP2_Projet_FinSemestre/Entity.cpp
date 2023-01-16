@@ -7,6 +7,10 @@ Entity::Entity(Vector2i pos, Vector2f shapeSize, Shape* shp) {
 	shape = shp;
 	posGrid = pos;
 	size = shapeSize;
+
+	if (!destructTexture.loadFromFile("Asset/Sprite/boom.png")) {
+		printf("error can't load boom sprite");
+	}
 }
 
 void Entity::SetCoordinateWtoG(Vector2f npos) {
@@ -87,11 +91,28 @@ void Entity::Move(Vector2f movDirection) {
 
 }
 
-Cell::Cell(Vector2i pos, Vector2f size, Shape* shp, Color color) : Entity(pos, size, shp) {
+Cell::Cell(Vector2i pos, Vector2f size, Shape* shp, Color color, Texture nTexture) : Entity(pos, size, shp) {
 	shape->setFillColor(color);
 	shape->setOutlineColor(Color::Black);
 
+	texture = nTexture;
+	sprite.setTexture(texture);
+
+	lifespawn = 0.4f;
+
 	Update();
+}
+
+void Cell::Lifespawn(float dt) {
+	if (lifespawn > 0) {
+		lifespawn -= dt;
+		std::cout << lifespawn << "\n";
+	}
+	else {
+		world.cellsToBeDeleted.push_back(this);
+		
+	}
+	
 }
 
 Blocker::Blocker(Vector2i pos, Vector2f size, Shape* shp) : Entity(pos, size, shp) {
@@ -173,20 +194,35 @@ void Player::Update(float dt) {
 	else if (invincibleTimer != 0) {
 		invincibleTimer = 0;
 	}
+
+	if (shotTimer > 0) {
+		shotTimer -= dt;
+	}
+	else if (shotTimer != 0) {
+		shotTimer = 0;
+	}
 }
 
 void Player::Shoot() {
-	world.playerProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
-		Vector2f(12, 4),
-		gridOffset,
-		new RectangleShape(Vector2f(12, 4)),
-		projectile,
-		Vector2f(1.0f, 0.0f)));
+	if (shotTimer == 0) {
+		world.playerProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
+			Vector2f(12, 4),
+			gridOffset,
+			new RectangleShape(Vector2f(12, 4)),
+			projectile,
+			Vector2f(1.0f, 0.0f)));
+		shotTimer = 0.5f;
+	}
 }
 
 void Player::Killed()
 {
 	if (invincibleTimer == 0) {
+		world.cells.push_back(new Cell(Vector2i(posGrid.x + 2, posGrid.y + 1),
+			Vector2f(Game::cellSize, Game::cellSize),
+			new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
+			Color::Blue, destructTexture));
+
 		SetCoordinateGtoW(Game::spawnPos[0]);
 		Game::changeLives(-1);
 		invincibleTimer = 3.0f;
@@ -194,19 +230,25 @@ void Player::Killed()
 		if (Game::lives < 0) {
 			Game::EndGame();
 			//world.Clear();
+			direction = Vector2f(0, 0);
 			SetCoordinateGtoW(Game::spawnPos[0]);
 		}
 	}
 }
-
-Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture) : Entity(pos, size, shp) {
+//add ennemy type
+Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture, EnemyType nType) : Entity(pos, size, shp) {
 	texture = newTexture;
 	sprite.setTexture(texture);
 	sprite.setPosition(Vector2f(posGrid.x * Game::cellSize, posGrid.y * Game::cellSize));
 	offsetShoot = Vector2i(0, 1);
 
-	int rndPos = Lib::rand() % 3 + 1;
-	posGrid = Game::spawnPos[rndPos];
+	type = nType;
+
+	int rndPos = Lib::rand() % 6 + 1;
+	if (rndPos < 4)
+		posGrid = Game::spawnPos[rndPos];
+	else
+		posGrid = Vector2i(80, Lib::rand() % 25 + 10);
 
 	shootDirections.push_back(Vector2f(-1.0f, 0.0f));
 	shootDirections.push_back(Vector2f(-0.7f, 0.3f));
@@ -217,7 +259,7 @@ Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture) : Enti
 	}
 }
 
-void Eneny::Update() {
+void Eneny::Update(float dt) {
 	direction = Vector2f(-0.2f, 0.0f);
 	gridOffset += direction;
 	//direction *= 0.92f;
@@ -264,6 +306,18 @@ void Eneny::Update() {
 	}
 	if (world.UpdateCollisionEnemyDestroy(Vector2i(posGrid.x, posGrid.y))) {
 		world.enemiesToBeDeleted.push_back(this);
+		if (type == EnemyType::cruiser) {
+			world.cells.push_back(new Cell(Vector2i(posGrid.x + 2, posGrid.y + 1),
+				Vector2f(Game::cellSize, Game::cellSize),
+				new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
+				Color::Blue, destructTexture));
+		}
+		else if (type == EnemyType::corvette) {
+			world.cells.push_back(new Cell(Vector2i(posGrid.x + 1, posGrid.y + 1),
+				Vector2f(Game::cellSize, Game::cellSize),
+				new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
+				Color::Blue, destructTexture));
+		}
 		Game::changeScore(50);
 	}
 
@@ -272,12 +326,15 @@ void Eneny::Update() {
 	shape->setPosition(posWorld);
 	sprite.setPosition(posWorld);
 
-	//to be deleted
-	if (Lib::rand() % 50 == 25) {
-		Shoot();
+	if (shotTimer > 0) {
+		shotTimer -= dt;
 	}
-	if (Lib::rand() % 50 == 30) {
-		ShootSpe();
+	else {
+		shotTimer = Lib::rand() % 2 + 4;
+		if (Lib::rand() % 5 == 4)
+			ShootSpe();
+		else
+			Shoot();
 	}
 }
 

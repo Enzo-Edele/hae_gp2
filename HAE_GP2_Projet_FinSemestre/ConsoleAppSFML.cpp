@@ -31,6 +31,7 @@ Player* player;
 
 void Project(){
     ContextSettings settings(0, 0, 2);
+    //map size PIXEL / CELL
     // X: 1280 / 16 = 80
     // Y: 720 / 16 = 45
     RenderWindow window(VideoMode(80 * Game::cellSize, 45 * Game::cellSize), "Project"); 
@@ -59,6 +60,16 @@ void Project(){
         printf("error can't load enemy sprite");
     }
 
+    Texture enemyFighterSmall;
+    if (!enemyFighterSmall.loadFromFile("Asset/Sprite/fighterES.png")) {
+        printf("error can't load enemy sprite");
+    }
+
+    Texture boom;
+    if (!boom.loadFromFile("Asset/Sprite/boom.png")) {
+        printf("error can't load enemy sprite");
+    }
+
     Game::scoreText.setFont(gameFont);
     Game::scoreText.setPosition(Vector2f(-180 + Game::gameCellX * Game::cellSize, 0));
 
@@ -75,7 +86,7 @@ void Project(){
         Game::playerSize,
         new RectangleShape(Game::playerSize),
         playerFighter);
-
+    /*  Checkker to verify grid
     int swap = 0;
     for (int y = 0; y < Game::gameCellY; y++) {
         for (int x = 0; x < Game::gameCellX; x++) {
@@ -91,7 +102,7 @@ void Project(){
         if (swap > 1)
             swap = 0;
     }
-
+*/
 	bool doHotLoad;
 
     double frameStart = 0;
@@ -169,12 +180,24 @@ void Project(){
         }
 
         if (enemySpawnTimer < 0) {
-            world.enemies.push_back(new Eneny(
-                Vector2i(60, 22),
-                Game::playerSize,
-                new RectangleShape(Game::playerSize),
-                enemyFighter));
-            enemySpawnTimer = Lib::rand() % 4 + 3;
+            int enemyType = Lib::rand() % 2;
+            if (enemyType == 0) {
+                world.enemies.push_back(new Eneny(
+                    Vector2i(60, 22),
+                    Game::playerSize,
+                    new RectangleShape(Game::playerSize),
+                    enemyFighter,
+                    EnemyType::cruiser));
+            }
+            else if (enemyType == 1) {
+                world.enemies.push_back(new Eneny(
+                    Vector2i(60, 22),
+                    Vector2f(Game::cellSize * 2, Game::cellSize * 2),
+                    new RectangleShape(Vector2f(Game::cellSize * 2, Game::cellSize * 2)),
+                    enemyFighterSmall,
+                    EnemyType::corvette));
+            }
+            enemySpawnTimer = Lib::rand() % 2 + 4;
         }
         else if(Game::state == GameState::Game) {
             enemySpawnTimer -= dt;
@@ -186,7 +209,7 @@ void Project(){
         player->Update(dt);
 
         for (auto& e : world.enemies) {
-            e->Update();
+            e->Update(dt);
         }
 
         for (auto& p : world.playerProj) {
@@ -197,7 +220,9 @@ void Project(){
             p->Update();
         }
 
-        player->Update(dt);
+        for (auto& c : world.cells) {
+            c->Lifespawn(dt);
+        }
 
         world.UpdateDeleted();
 
@@ -212,7 +237,7 @@ void Project(){
         window.draw(background->sprite);
 
         for (auto& c : world.cells) {
-            //c->Draw(window);
+            c->Draw(window);
         }
 
         for (auto& b : world.blockers) {

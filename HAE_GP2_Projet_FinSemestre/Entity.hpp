@@ -6,11 +6,22 @@
 
 #include "Game.hpp"
 
+enum class EnemyType : int {
+	cruiser,
+	corvette,
+};
+
+enum class ProjectileType : int {
+	laser,
+	missile,
+};
+
 class Entity {
 public:
 	Shape* shape = nullptr;
 	Texture texture;
 	Sprite sprite;
+	Texture destructTexture;
 
 	Vector2i posGrid = Vector2i(0, 0);
 	Vector2f gridOffset = Vector2f(0, 0);
@@ -49,10 +60,14 @@ public:
 
 class Cell : public Entity {
 public:
-	Cell(Vector2i pos, Vector2f size, Shape* shp, Color color);
+	float lifespawn = 0.0f;
+	Cell(Vector2i pos, Vector2f size, Shape* shp, Color color, Texture nTexture);
+
+	void Lifespawn(float dt);
 
 	void Draw(RenderWindow& win) {
-		win.draw(*shape);
+		//win.draw(*shape);
+		win.draw(sprite);
 	}
 };
 
@@ -72,6 +87,7 @@ public:
 	Texture projectile;
 
 	float invincibleTimer;
+	float shotTimer;
 
 	Player(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture);
 
@@ -95,13 +111,16 @@ public:
 	Texture projectile;
 	//liste de commande
 	std::vector<Vector2f> shootDirections;
+	float shotTimer;
 
-	Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture);
+	EnemyType type;
+
+	Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture, EnemyType nType);
 
 	//hasCollision
 	bool HasCollision(Vector2i pos);
 
-	void Update();
+	void Update(float dt);
 
 	void Draw(RenderWindow& win) {
 		//win.draw(*shape);

@@ -106,6 +106,5 @@ void Game::playEnemyDestruction() {
 	playSound("Asset/Sound/EnemyDestruction.ogg");
 }
 */
-//image + texture here
 
  

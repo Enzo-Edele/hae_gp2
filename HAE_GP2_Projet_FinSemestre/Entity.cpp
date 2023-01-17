@@ -114,7 +114,6 @@ Cell::Cell(Vector2i pos, Vector2f size, Shape* shp, Color color) : Entity(pos, s
 void Cell::Lifespawn(float dt) {
 	if (lifespawn > 0) {
 		lifespawn -= dt;
-		std::cout << lifespawn << "\n";
 	}
 	else {
 		world.cellsToBeDeleted.push_back(this);
@@ -222,14 +221,15 @@ void Player::Shoot() {
 			gridOffset,
 			new RectangleShape(Vector2f(12, 4)),
 			projectile,
-			Vector2f(1.0f, 0.0f)));
+			Vector2f(1.0f, 0.0f),
+			ProjectileType::laser));
 		shotTimer = 0.5f;
 	}
 }
 
 void Player::Killed()
 {
-	if (invincibleTimer == 0) {
+	if (invincibleTimer == 0 && Game::state == GameState::Game) {
 		world.cells.push_back(new Cell(Vector2i(posGrid.x + 2, posGrid.y + 1),
 			Vector2f(Game::cellSize, Game::cellSize),
 			new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
@@ -266,6 +266,9 @@ Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture, EnemyT
 		else
 			posGrid = Vector2i(80, Lib::rand() % 25 + 11);
 	}
+	if (type == EnemyType::missileCorvette) {
+		posGrid = Vector2i(60, Lib::rand() % 35 + 6);
+	}
 
 	shootDirections.push_back(Vector2f(-1.0f, 0.0f));
 	shootDirections.push_back(Vector2f(-0.7f, 0.3f));
@@ -274,10 +277,21 @@ Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture, EnemyT
 	if (!projectile.loadFromFile("Asset/Sprite/enemyProj.png")) {
 		printf("error can't load playerProj sprite");
 	}
+	if (!missile.loadFromFile("Asset/Sprite/enemyMissile.png")) {
+		printf("error can't load enemyMissile sprite");
+	}
 }
 
 void Eneny::Update(float dt) {
-	direction = Vector2f(-0.2f, 0.0f);
+	if (type == EnemyType::cruiser) {
+		direction = Vector2f(-0.2f, 0.0f);
+	}
+	if (type == EnemyType::corvette) {
+		direction = Vector2f(-0.2f, 0.0f);
+	}
+	if (type == EnemyType::missileCorvette) {
+		direction = Vector2f(0.0f, 0.0f);
+	}
 	gridOffset += direction;
 	//direction *= 0.92f;
 
@@ -335,6 +349,9 @@ void Eneny::Update(float dt) {
 				new RectangleShape(Vector2f(Game::cellSize, Game::cellSize)),
 				Color::Blue));
 		}
+		else if (type == EnemyType::missileCorvette) {
+
+		}
 		Game::changeScore(50);
 	}
 
@@ -355,6 +372,10 @@ void Eneny::Update(float dt) {
 			shotTimer = Lib::rand() % 2 + 5;
 			ShootSpe();
 		}
+		if (type == EnemyType::missileCorvette) {
+			shotTimer = Lib::rand() % 1 + 3;
+			Shoot();
+		}
 	}
 }
 
@@ -367,12 +388,31 @@ bool Eneny::HasCollision(Vector2i pos) {
 }
 
 void Eneny::Shoot() {
-	world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
-		Vector2f(12, 4),
-		gridOffset,
-		new RectangleShape(Vector2f(12, 4)),
-		projectile,
-		Vector2f(-1.0f, 0.0f)));
+	if (type == EnemyType::corvette) {
+		world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
+			Vector2f(12, 4),
+			gridOffset,
+			new RectangleShape(Vector2f(12, 4)),
+			projectile,
+			Vector2f(-1.0f, 0.0f),
+			ProjectileType::laser));
+	}
+	if (type == EnemyType::missileCorvette) {
+		world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
+			Vector2f(16, 8),
+			Vector2f(2.0f, 1.0f),
+			new RectangleShape(Vector2f(16, 8)),
+			missile,
+			Vector2f(-1.0f, 0.0f),
+			ProjectileType::missile));
+		world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
+			Vector2f(16, 8),
+			Vector2f(2.0f, -3.0f),
+			new RectangleShape(Vector2f(16, 8)),
+			missile,
+			Vector2f(-1.0f, 0.0f),
+			ProjectileType::missile));
+	}
 }
 
 void Eneny::ShootSpe()
@@ -383,11 +423,12 @@ void Eneny::ShootSpe()
 			gridOffset,
 			new RectangleShape(Vector2f(12, 4)),
 			projectile,
-			shootDirections[i]));
+			shootDirections[i],
+			ProjectileType::laser));
 	}
 }
 
-Projectile::Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir) : Entity(pos, size, shp) {
+Projectile::Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir, ProjectileType nType) : Entity(pos, size, shp) {
 	texture = newTexture;
 
 	gridOffset = offset;
@@ -411,6 +452,8 @@ void Projectile::Forward(int px)
 {
 	trs = trs.translate(Vector2f(0, -px));
 	sprite.setPosition(trs.transformPoint(0, 0));
+
+	shape->setFillColor(Color::Transparent);
 }
 
 void Projectile::Update() {

@@ -9,6 +9,7 @@
 enum class EnemyType : int {
 	cruiser,
 	corvette,
+	missileCorvette,
 };
 
 enum class ProjectileType : int {
@@ -113,6 +114,7 @@ class Eneny : public Entity {
 public:
 	Vector2i startPos;
 	Texture projectile;
+	Texture missile;
 	//liste de commande
 	std::vector<Vector2f> shootDirections;
 	float shotTimer;
@@ -138,9 +140,10 @@ public:
 
 class Projectile : public Entity {
 public:
-	Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir);
+	Projectile(Vector2i pos, Vector2f size, Vector2f offset, Shape* shp, Texture newTexture, Vector2f dir, ProjectileType nType);
 
 	Transform trs;
+	ProjectileType type;
 
 	//hasCollision ???
 	bool HasCollision(Vector2i pos);

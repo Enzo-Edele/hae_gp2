@@ -81,6 +81,7 @@ void Project(){
         Game::playerSize,
         new RectangleShape(Game::playerSize),
         playerFighter);
+
     /*  Checkker to verify grid
     int swap = 0;
     for (int y = 0; y < Game::gameCellY; y++) {
@@ -198,6 +199,14 @@ void Project(){
         }
         else if (Game::state == GameState::Game) {
             enemyCruiserSpawnTimer -= dt;
+        }
+        else {
+            //world.enemies.push_back(new Eneny(
+            //    Vector2i(60, 22),
+            //    Vector2f(Game::cellSize * 4, Game::cellSize * 2),
+            //    new RectangleShape(Vector2f(Game::cellSize * 4, Game::cellSize * 2)),
+            //    enemyFighter,
+            //    EnemyType::missileCorvette));
         }
 
         //Update

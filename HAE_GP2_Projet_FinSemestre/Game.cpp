@@ -76,7 +76,7 @@ void Game::StartGame()
 	Game::menuText.setString(std::string(""));
 	Game::creditText1.setString("");
 	Game::creditText2.setString("");
-	Game::creditText2.setString("");
+	Game::creditText3.setString("");
 }
 void Game::PauseGame() {
 	state = GameState::Pause;

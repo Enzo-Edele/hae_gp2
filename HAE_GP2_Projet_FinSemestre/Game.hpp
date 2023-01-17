@@ -40,6 +40,10 @@ public:
 
 	static Text menuText;
 
+	static Text creditText1;
+	static Text creditText2;
+	static Text creditText3;
+
 	static void StartGame();
 
 	static void PauseGame();

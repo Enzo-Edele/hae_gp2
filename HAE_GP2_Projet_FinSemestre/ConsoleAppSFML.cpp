@@ -72,7 +72,14 @@ void Project(){
 
     Game::menuText.setFont(gameFont);
     Game::menuText.setString("Press any key to start");
-    Game::menuText.setPosition(Vector2f(640, 360));
+    Game::menuText.setPosition(Vector2f(600, 300));
+
+    Game::creditText1.setFont(gameFont);
+    Game::creditText2.setFont(gameFont);
+    Game::creditText3.setFont(gameFont);
+    Game::creditText1.setPosition(Vector2f(600, 360));
+    Game::creditText2.setPosition(Vector2f(600, 470));
+    Game::creditText3.setPosition(Vector2f(600, 480));
 
     background = new Background(&backgroundTexture);
 
@@ -131,8 +138,8 @@ void Project(){
                 Game::StartGame();
             }
             //is key released
-            if (event.type == Event::KeyReleased && Game::state == GameState::Game) {
-                if (event.key.code == Keyboard::Space) {
+            if (event.type == Event::KeyReleased) {
+                if (event.key.code == Keyboard::Space && Game::state == GameState::Game) {
                     player->Shoot();
                 }
                 if (event.key.code == Keyboard::A) {
@@ -140,6 +147,12 @@ void Project(){
                 }
                 if (event.key.code == Keyboard::E) {
 
+                }
+                if (event.key.code == Keyboard::Escape && Game::state == GameState::Game) {
+                    Game::PauseGame();
+                }
+                if (event.key.code == Keyboard::Escape && Game::state == GameState::Pause) {
+                    Game::ResumeGame();
                 }
             }
         }
@@ -164,8 +177,13 @@ void Project(){
             Keyboard::isKeyPressed(Keyboard::Left)) && Game::state == GameState::Game) {
             player->direction.x -= speed;
         }
+            
+
         //Mouse Buttton
-        if (Mouse::isButtonPressed(Mouse::Left)) {
+        if (Mouse::isButtonPressed(Mouse::Left) && (Game::state == GameState::Menu)) {
+            Game::StartGame();
+        }
+        if (Mouse::isButtonPressed(Mouse::Left) && Game::state == GameState::Game) {
             //Vector2i mousePos = Mouse::getPosition(window);
             //Vector2i mousePosGrid = Vector2i(mousePos.x / Game::cellSize, mousePos.y / Game::cellSize);
             //Vector2f size(Game::cellSize, Game::cellSize);
@@ -267,6 +285,9 @@ void Project(){
         window.draw(Game::scoreText);
         window.draw(Game::livesText);
         window.draw(Game::menuText);
+        window.draw(Game::creditText1);
+        window.draw(Game::creditText2);
+        window.draw(Game::creditText3);
 
         ImGui::EndFrame();
         ImGui::SFML::Render(window);

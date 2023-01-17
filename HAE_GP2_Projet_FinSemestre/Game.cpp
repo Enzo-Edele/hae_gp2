@@ -64,6 +64,9 @@ void Game::changeLives(int change)
 }
 
 Text Game::menuText;
+Text Game::creditText1;
+Text Game::creditText2;
+Text Game::creditText3;
 
 void Game::StartGame()
 {
@@ -71,18 +74,26 @@ void Game::StartGame()
 	Game::changeScore(-Game::score);
 	Game::changeLives(4);
 	Game::menuText.setString(std::string(""));
+	Game::creditText1.setString("");
+	Game::creditText2.setString("");
+	Game::creditText2.setString("");
 }
 void Game::PauseGame() {
 	state = GameState::Pause;
+	Game::menuText.setString(std::string("Pause"));
 }
 void Game::ResumeGame() {
 	state = GameState::Game;
+	Game::menuText.setString(std::string(""));
 }
 void Game::EndGame() {
 	state = GameState::GameOver;
 	Game::menuText.setString(std::string("Game Over Press 'R' to restart"));
+	Game::creditText1.setString(std::string("Graphisme : Enzo Cloup"));
+	Game::creditText2.setString(std::string("Programation : Enzo Cloup"));
+	Game::creditText3.setString(std::string("Sound : Kenney Sci-Fi sound pack"));
 }
-/*
+
 void Game::playSound(const char* sound)
 {
 	sf::SoundBuffer* sb = soundBuffers[sound];
@@ -110,7 +121,7 @@ void Game::playPlayerDestruction() {
 void Game::playEnemyDestruction() {
 	playSound("Asset/Sound/EnemyDestruction.ogg");
 }
-*/
+
 
 
  

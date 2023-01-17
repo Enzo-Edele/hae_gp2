@@ -216,6 +216,7 @@ void Player::Update(float dt) {
 
 void Player::Shoot() {
 	if (shotTimer == 0) {
+		Game::playPlayerShot();
 		world.playerProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
 			Vector2f(12, 4),
 			gridOffset,
@@ -246,6 +247,7 @@ void Player::Killed()
 			SetCoordinateGtoW(Game::spawnPos[0]);
 		}
 	}
+	Game::playPlayerDestruction();
 }
 //add ennemy type
 Eneny::Eneny(Vector2i pos, Vector2f size, Shape* shp, Texture newTexture, EnemyType nType) : Entity(pos, size, shp) {
@@ -337,6 +339,7 @@ void Eneny::Update(float dt) {
 	}
 	if (world.UpdateCollisionEnemyDestroy(Vector2i(posGrid.x, posGrid.y))) {
 		world.enemiesToBeDeleted.push_back(this);
+		Game::playEnemyDestruction();
 		if (type == EnemyType::cruiser) {
 			world.cells.push_back(new Cell(Vector2i(posGrid.x + 2, posGrid.y + 1),
 				Vector2f(Game::cellSize, Game::cellSize),
@@ -388,6 +391,7 @@ bool Eneny::HasCollision(Vector2i pos) {
 }
 
 void Eneny::Shoot() {
+	Game::playEnemyShot();
 	if (type == EnemyType::corvette) {
 		world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
 			Vector2f(12, 4),
@@ -417,6 +421,7 @@ void Eneny::Shoot() {
 
 void Eneny::ShootSpe()
 {
+	Game::playEnemyShot();
 	for (int i = 0; i < shootDirections.size(); i++) {
 		world.enemyProj.push_back(new Projectile((Vector2i)(posGrid + offsetShoot),
 			Vector2f(12, 4),

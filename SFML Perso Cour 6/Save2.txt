@@ -1,9 +1,0 @@
-PenChange 1.0
-Advance 100.0
-RotateLeft 90.0
-Advance 100.0
-RotateLeft 90.0
-Advance 100.0
-RotateLeft 90.0
-Advance 100.0
-RotateLeft 90.0

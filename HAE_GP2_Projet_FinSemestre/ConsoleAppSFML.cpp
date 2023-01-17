@@ -78,7 +78,7 @@ void Project(){
     Game::creditText2.setFont(gameFont);
     Game::creditText3.setFont(gameFont);
     Game::creditText1.setPosition(Vector2f(600, 360));
-    Game::creditText2.setPosition(Vector2f(600, 470));
+    Game::creditText2.setPosition(Vector2f(600, 420));
     Game::creditText3.setPosition(Vector2f(600, 480));
 
     background = new Background(&backgroundTexture);
